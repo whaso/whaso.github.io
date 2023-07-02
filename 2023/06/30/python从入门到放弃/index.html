@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一. 基础 编译型语言 定义：在程序运行之前，源代码会先经过编译器将其转换为机器语言的形式，生成可执行文件。在运行时，计算机直接执行该可执行文件，无需再进行翻译或解释。C、C++ 和 Java 等语言属于编译型语言。 白话定义：只有第一次执行的时候需要编译,之后如果没修改源代码就不会再编译了 示例：C++、Go、Java   解释型语言 定义：在程序运行时，源代码逐行解释并执行。解释器将源代码转换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python从入门到放弃">
+<meta property="og:url" content="http://example.com/2023/06/30/python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/index.html">
+<meta property="og:site_name" content="whaso&#39;s Blog">
+<meta property="og:description" content="一. 基础 编译型语言 定义：在程序运行之前，源代码会先经过编译器将其转换为机器语言的形式，生成可执行文件。在运行时，计算机直接执行该可执行文件，无需再进行翻译或解释。C、C++ 和 Java 等语言属于编译型语言。 白话定义：只有第一次执行的时候需要编译,之后如果没修改源代码就不会再编译了 示例：C++、Go、Java   解释型语言 定义：在程序运行时，源代码逐行解释并执行。解释器将源代码转换">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-30T03:14:42.000Z">
+<meta property="article:modified_time" content="2023-07-01T01:58:15.652Z">
+<meta property="article:author" content="WHASO">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/30/python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python从入门到放弃 | whaso's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="whaso's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">whaso's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/python%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WHASO">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whaso's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python从入门到放弃
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-30 11:14:42" itemprop="dateCreated datePublished" datetime="2023-06-30T11:14:42+08:00">2023-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-01 09:58:15" itemprop="dateModified" datetime="2023-07-01T09:58:15+08:00">2023-07-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一-基础"><a href="#一-基础" class="headerlink" title="一. 基础"></a>一. 基础</h1><ul>
+<li>编译型语言<ul>
+<li>定义：在程序运行之前，源代码会先经过编译器将其转换为机器语言的形式，生成可执行文件。在运行时，计算机直接执行该可执行文件，无需再进行翻译或解释。C、C++ 和 Java 等语言属于编译型语言。</li>
+<li>白话定义：只有第一次执行的时候需要编译,之后如果没修改源代码就不会再编译了</li>
+<li>示例：C++、Go、Java</li>
+</ul>
+</li>
+<li>解释型语言<ul>
+<li>定义：在程序运行时，源代码逐行解释并执行。解释器将源代码转换为机器语言，并逐行执行代码。解释型语言的代码无需编译，可以直接运行，但由于需要逐行解释执行，相对于编译型语言，解释型语言的执行速度通常较慢。</li>
+<li>白话定义：每次运行都会从第一行进行编译,编译一行执行一行</li>
+<li>示例：Python、JavaScript、Ruby</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-基中基"><a href="#1-基中基" class="headerlink" title="1. 基中基"></a>1. 基中基</h2><h3 id="1-1-关键字"><a href="#1-1-关键字" class="headerlink" title="1.1. 关键字"></a>1.1. 关键字</h3><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>涉及功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>True, False, None</td>
+<td>真 假 空</td>
+</tr>
+<tr>
+<td>if, elif, else, and, not, assert, or, is, in</td>
+<td>逻辑判断</td>
+</tr>
+<tr>
+<td>try, except, finally, raise</td>
+<td>异常捕获</td>
+</tr>
+<tr>
+<td>for, while, continue, break, return</td>
+<td>循环</td>
+</tr>
+<tr>
+<td>from, import</td>
+<td>导包</td>
+</tr>
+<tr>
+<td>def, class, lambda</td>
+<td>定义函数、类、匿名函数</td>
+</tr>
+<tr>
+<td>async, await, yield</td>
+<td>异步</td>
+</tr>
+<tr>
+<td>global, nonlocal</td>
+<td>变量空间</td>
+</tr>
+<tr>
+<td>as, del, pass, with, type</td>
+<td>重命名、删除、PASS、上下文、类型</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-逻辑运算符"><a href="#1-2-逻辑运算符" class="headerlink" title="1.2. 逻辑运算符"></a>1.2. 逻辑运算符</h3><ul>
+<li>与 <code>and</code>: 一假即假</li>
+<li>或 <code>or</code>: 一真即真（注意短路逻辑： <code>1 or 1 / 0</code> 不会报错，程序只会走第一个1然后就会执行下一行）</li>
+<li>非 <code>not</code>: 真假取反</li>
+</ul>
+<h3 id="1-3-比较运算符"><a href="#1-3-比较运算符" class="headerlink" title="1.3. 比较运算符"></a>1.3. 比较运算符</h3><ul>
+<li><p><code>//</code> 取整除 9 &#x2F;&#x2F; 4 &#x3D; 2</p>
+</li>
+<li><p><code>%</code> 取余 9%4 &#x3D; 1</p>
+</li>
+<li><p><code>^</code>   取异或  把数字转化为二进制取  0 1 为 1 ，1 0 为 1， 1 1 为1， 0 0 为 0</p>
+</li>
+<li><p><code>**</code>  幂</p>
+</li>
+</ul>
+<h3 id="1-4-比较运算符"><a href="#1-4-比较运算符" class="headerlink" title="1.4. 比较运算符"></a>1.4. 比较运算符</h3><ul>
+<li><p><code>&gt; &lt; == != &gt;= &lt;=</code></p>
+</li>
+<li><p>返回的结果都是bool类型, True表示条件成立, False表示不成立.</p>
+</li>
+</ul>
+<h3 id="1-5-输入输出"><a href="#1-5-输入输出" class="headerlink" title="1.5. 输入输出"></a>1.5. 输入输出</h3><ul>
+<li><p><code>print()</code> 调用底层的<code>sys.stdout.write</code>方法，前往控制台打印输出</p>
+</li>
+<li><p><code>input()</code>  无论输入什么类型的数据，都会转化为字符串</p>
+</li>
+</ul>
+<h3 id="1-6-循环"><a href="#1-6-循环" class="headerlink" title="1.6. 循环"></a>1.6. 循环</h3><ul>
+<li><p>循环语句结合<code>else</code>语句使用，当循环语句执行了<code>break</code>表示非正常结束，<code>else</code>语句不会执行，否则会执行<code>else</code>语句</p>
+</li>
+<li><p>循环语句里有<code>break/return</code>时, <code>break/return</code>执行了, <code>else</code>语句就不会执行</p>
+</li>
+<li><p><code>break/continue</code> 只影响一层循环</p>
+</li>
+</ul>
+<h3 id="1-7-if三目运算"><a href="#1-7-if三目运算" class="headerlink" title="1.7. if三目运算"></a>1.7. if三目运算</h3><ul>
+<li><p><code>a if a &gt; b else b</code> 条件成立取a，不成立取b</p>
+</li>
+<li><p>if 除了判断bool类型, 还可以判断</p>
+<ul>
+<li>容器类型(字符串, 列表, 元组, 字典, 集合, <code>range()</code>, <code>bytes()</code>) 判断是否有数据</li>
+<li>非零即真(只要不是0, 条件都成立)</li>
+<li>None 条件不成立, not none, 表示非空, 条件成立</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-8-注释"><a href="#1-8-注释" class="headerlink" title="1.8 注释"></a>1.8 注释</h3><ul>
+<li>单行 <code># 这是注释</code></li>
+<li>多行 <code>&quot;&quot;&quot; 这是多行注释 &quot;&quot;&quot;</code></li>
+</ul>
+<h2 id="2-容器"><a href="#2-容器" class="headerlink" title="2. 容器"></a>2. 容器</h2><h3 id="2-1-字符串"><a href="#2-1-字符串" class="headerlink" title="2.1. 字符串"></a>2.1. 字符串</h3><blockquote>
+<p><strong>字符串用<code>join</code>比直接<code>+</code>高效原因</strong>：在 Python 中，字符串是不可变类型，这意味着一旦我们创建了一个字符串对象，它就不能被修改或更新。因此，每次使用 <code>+</code> 操作符拼接字符串时，都会创建一个新的字符串对象，并将之前字符串对象的内容复制到新的字符串对象中，这个复制的操作会带来额外的内存分配和内存拷贝的开销，特别是在需要拼接大量的字符串时，会消耗大量的系统资源，导致程序运行缓慢。 相对地，使用 <code>join()</code> 方法的拼接字符串操作则更加高效。<code>join()</code> 方法本质上是将多个字符串通过指定的分隔符拼接在一起，而与此相关的方法包括 <code>split()</code>，<code>replace()</code> 和 <code>format()</code> 等方法，它们均采用类似的算法。在 <code>join()</code> 方法的实现中，Python 的解释器会先在内存中分配一个足够大的单个字符串缓冲区，然后扫描要拼接的字符串，将其复制到单个缓冲区中，并在不同字符串之间插入指定的分隔符。这种方法可以有效地避免频繁创建或拷贝字符串对象，从而提高拼接字符串的效率。 此外，<code>join()</code> 方法还可以接受一个可迭代对象作为参数，如列表，元组，生成器等，它们会返回一个字符串，其中可迭代对象按照指定的分隔符进行拼接。这种方式具有更高的灵活性和实用性，因为它可以用于拼接任意数量的字符串，而且可以用于迭代较大的数据集合，而不会导致系统资源消耗过多。</p>
+</blockquote>
+<ul>
+<li>定义：用单引号、双引号、三引号均可，仅三引号可以换行</li>
+<li>切片：<code>[开始位置:结束位置:步长]</code> 左闭右开<ul>
+<li><code>[::-1]</code> 字符串快速逆置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">my_str = <span class="string">&quot;python&quot;</span></span><br><span class="line"><span class="built_in">isinstance</span>(my_str, <span class="built_in">str</span>)  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">my_age = <span class="number">18</span></span><br><span class="line"><span class="built_in">isinstance</span>(my_age, <span class="built_in">int</span>)  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">my_age = <span class="built_in">str</span>(my_age)  <span class="comment"># &quot;18&quot;</span></span><br><span class="line"><span class="built_in">isinstance</span>(my_age, <span class="built_in">str</span>)  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用</strong></p>
+<ul>
+<li><code>.find(要查询的字符, 查询开始索引, 查询结束索引)</code> 左闭右开，查空返回 -1</li>
+<li><code>.replace(str1, str2, 替换次数)</code> 字符串替换，替换次数默认-1全部替换</li>
+<li><code>.split(str1, 切片次数)</code> 字符串以 str1 为分隔符进行切片，切片次数默认-1全部切，返回分隔后的列表</li>
+<li><code>.lower()</code> 英文转小写 <code>upper()</code>转大写</li>
+</ul>
+<h3 id="2-2-列表"><a href="#2-2-列表" class="headerlink" title="2.2. 列表"></a>2.2. 列表</h3><p><strong>定义</strong>：<code>[]</code> 或 <code>list()</code> </p>
+<p><strong>列表推导式</strong>： 列表中可以包含条件语句，表示筛选符合条件的元素。在这种情况下，底层逻辑还会涉及以下步骤：</p>
+<ol>
+<li>创建一个空列表。</li>
+<li>对于列表推导式中的每个元素表达式，按照迭代顺序依次执行以下步骤：<ol>
+<li>在当前作用域中计算元素表达式的值。</li>
+<li>如果条件表达式的值为真，则将计算得到的值添加到列表中。</li>
+</ol>
+</li>
+<li>返回最终生成的列表。</li>
+</ol>
+<p><strong>增</strong></p>
+<ul>
+<li><code>.append</code> 加整个对象，加字典也是整个字典</li>
+<li><code>.extend</code> 打散加进去，加字典默认加字典的<code>key</code></li>
+<li><code>.insert(index, obj)</code> 在指定位置前面加, 是整个加进去的</li>
+</ul>
+<p><strong>删</strong></p>
+<ul>
+<li><p><code>del list[::]</code> 可以和切片一起操作根据索引删除列表元素</p>
+</li>
+<li><p><code>.pop()</code> 只能根据单独索引删除对应元素, 默认删最后一个, 会返回删除的元素</p>
+</li>
+<li><p><code>.remove()</code> 指定元素删除</p>
+</li>
+</ul>
+<p><strong>改</strong></p>
+<p><code>list[index] = &quot;new&quot;</code>  可以用切片同时更改多个数据,注意下面示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list = [<span class="number">1</span>, <span class="string">&quot;2&quot;</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list[<span class="number">0</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list</span><br><span class="line">[<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list[:<span class="number">0</span>] = <span class="string">&quot;456&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list</span><br><span class="line">[<span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list[:<span class="number">2</span>] = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>查</strong></p>
+<ul>
+<li><code>in</code> 判断是否存在，只可判断最外层数据，内层还有容器要索引进去查</li>
+<li><code>.index(obj, start, end)</code> 左闭右开，找不到报<code>ValueError</code></li>
+<li><code>.count(obj)</code></li>
+</ul>
+<p><strong>排序</strong></p>
+<ul>
+<li><p><code>.sort(reverse=False)</code> 默认是从小到大, <code>reverse=True</code> 改为从大到小</p>
+</li>
+<li><p><code>.reverse()</code> 将列表逆置, 与上面的<code>reverse=True</code>不同</p>
+</li>
+</ul>
+<h3 id="2-3-元组"><a href="#2-3-元组" class="headerlink" title="2.3. 元组"></a>2.3. 元组</h3><p><strong>定义</strong>：<code>tuple()</code> 或 <code>(1, 2)</code>  如果只有一个元素, 逗号不能省略, 有序</p>
+<h3 id="2-4-字典"><a href="#2-4-字典" class="headerlink" title="2.4. 字典"></a>2.4. 字典</h3><p><strong>定义</strong></p>
+<ul>
+<li><code>dict()</code> 或 <code>&#123;&quot;a&quot;: 1, &quot;b&quot;: 2&#125;</code></li>
+<li><code>zip</code>组合<code>key</code>和<code>value</code> 生成字典</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>keys = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_dict = <span class="built_in">dict</span>(<span class="built_in">zip</span>(keys, values))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_dict</span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>增:</strong>   </p>
+<ul>
+<li><code>dict[key] = value</code></li>
+</ul>
+<p><strong>删:</strong>   </p>
+<ul>
+<li><p><code>del dict[key]</code>  必须要有<code>key</code>数据</p>
+</li>
+<li><p><code>.pop(key, default)</code>  必须要有<code>key</code>数据, 会返回所删项的<code>value</code>, 如果字典里没有这个<code>key</code>就会返回<code>default</code></p>
+</li>
+<li><p><code>.popitem()</code>  takes no arguments, return the last item as a tuple()</p>
+</li>
+<li><p><code>.clear()</code> 清空</p>
+</li>
+</ul>
+<p><strong>改:</strong>  </p>
+<ul>
+<li><code>dict[key] = value</code>  和增加元素相同, 所以当原本没有此<code>key</code>就变成增加元素了</li>
+</ul>
+<p><strong>查:</strong>   </p>
+<ul>
+<li><p><code>dict[key]</code>  如果不存在会报错</p>
+</li>
+<li><p><code>.get(key, default)</code>   如果不存在则返回<code>default</code>  不写<code>default</code>找不到会返回<code>None</code> 不会报错</p>
+</li>
+</ul>
+<p><strong>合并:</strong>  </p>
+<ul>
+<li><code>dict1.update(dict2)</code>  把字典2的每个键值对数据合并到字典1中, 如果有重复的则更新1的内容</li>
+</ul>
+<p><strong>遍历:</strong> </p>
+<ul>
+<li><code>for key in dict.keys()</code></li>
+<li><code>for values in dict.values()</code></li>
+<li><code>for item in dict.items()</code>           <strong>item是个tuple</strong></li>
+<li><code>for key, value in dict.items()</code>         遍历 + 拆包</li>
+</ul>
+<p><strong>排序：</strong></p>
+<ul>
+<li><code>sorted(d.items(), key=lambda x : x[0/1])</code></li>
+</ul>
+<h3 id="2-5-集合"><a href="#2-5-集合" class="headerlink" title="2.5. 集合"></a>2.5. 集合</h3><ul>
+<li>集合是一个容器类型, 可以存储多个数据, 但是多个数据不能重复</li>
+<li>集合只能存储不可变类型数据, 也就是: 数字, 字符串, 元组    同字典的key</li>
+<li>空集合不能使用**{}**来表示, {}是字典, 创建时用 <strong>set()</strong> 来创建空集合</li>
+<li>遍历集合不能用通过下标, 可以用for遍历, 可迭代对象</li>
+</ul>
+<p><strong>特点:</strong></p>
+<ol>
+<li>无序, so集合不能通过索引获取数据和通过索引修改数据</li>
+<li>数据不能重复,数据是唯一的</li>
+<li>可变类型</li>
+</ol>
+<p><strong>操作符：</strong></p>
+<p><strong>^</strong>  补  {1，2} ^ {2, 3}  &#x3D;&gt;  {1, 3}</p>
+<p><strong>&amp;</strong> 交  {1，2} &amp; {2, 3}  &#x3D;&gt;  {2, }</p>
+<p><strong>|</strong>   并   {1，2} | {2, 3}  &#x3D;&gt;  {1, 2, 3}</p>
+<p><strong>-</strong>   差   {1，2} - {2, 3}  &#x3D;&gt;  {1, }</p>
+<p><strong>增:</strong></p>
+<p>.<strong>add()</strong> 重复的数据只保留一个</p>
+<p><strong>删:</strong></p>
+<p><strong>.remove(value)</strong> 指定数据删除</p>
+<h3 id="2-6-公共方法"><a href="#2-6-公共方法" class="headerlink" title="2.6. 公共方法"></a>2.6. 公共方法</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>Python 表达式</th>
+<th>结果</th>
+<th>描述</th>
+<th>支持的数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>[1, 2] + [3, 4]</td>
+<td>[1, 2, 3, 4]</td>
+<td>合并</td>
+<td>字符串、列表、元组</td>
+</tr>
+<tr>
+<td>*</td>
+<td>[‘Hi!’] * 4</td>
+<td>[‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]</td>
+<td>复制</td>
+<td>字符串、列表、元组</td>
+</tr>
+<tr>
+<td>in</td>
+<td>3 in (1, 2, 3)</td>
+<td>True</td>
+<td>元素是否存在</td>
+<td>字符串、列表、元组、字典</td>
+</tr>
+<tr>
+<td>not in</td>
+<td>4 not in (1, 2, 3)</td>
+<td>True</td>
+<td>元素是否不存在</td>
+<td>字符串、列表、元组、字典</td>
+</tr>
+</tbody></table>
+<p><strong>python内置函数</strong></p>
+<ul>
+<li><p><code>len()</code>  获取容器的元素数量</p>
+</li>
+<li><p><code>max()</code>  返回容器中元素最大值  |  类似的 <code>min()</code>  最小</p>
+</li>
+<li><p><code>enumerate()</code> </p>
+<ul>
+<li>在使用for循环的时候可以遍历数据又可以遍历索引, 列表&#x2F;元组&#x2F;字典都可以使用</li>
+<li>当用于字典遍历所有items时返回的是一个索引数据和一个元组</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-7-可变不可变类型"><a href="#2-7-可变不可变类型" class="headerlink" title="2.7. 可变不可变类型"></a>2.7. 可变不可变类型</h3><p>不可变类型</p>
+<ul>
+<li>定义：不允许在原本内存空间基础上修改数据, 修改数据后内存地址会发生变化</li>
+<li>示例：列表, 字典, 集合</li>
+</ul>
+<p>可变类型</p>
+<ul>
+<li>定义：允许在原本内存空间修改数据，修改后一是在原有内存空间基础上修改数据内存不变，二是重新赋值内存地址可能发生变化</li>
+<li>示例：数字, 字符串, 元组</li>
+</ul>
+<h2 id="3-函数"><a href="#3-函数" class="headerlink" title="3. 函数"></a>3. 函数</h2><blockquote>
+<p>程序中定义的变量都是保存在内存中的, 局部变量也是, 当函数执行结束后局部变量都会销毁,内存释放</p>
+</blockquote>
+<h3 id="3-1-文档说明"><a href="#3-1-文档说明" class="headerlink" title="3.1. 文档说明"></a>3.1. 文档说明</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">show</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot; func docs &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># &#x27;&#x27;&#x27; others &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;life is short i use python&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">show()</span><br><span class="line"><span class="built_in">help</span>(show)</span><br><span class="line"><span class="comment"># life is short i use python</span></span><br><span class="line"><span class="comment"># Help on function show in module __main__:</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># show()</span></span><br><span class="line"><span class="comment">#     func docs</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-返回值"><a href="#3-2-返回值" class="headerlink" title="3.2. 返回值"></a>3.2. 返回值</h3><ul>
+<li>函数不写<code>return</code> 取函数返回值时会取到 <code>None</code></li>
+<li>在多层循环中 <code>return</code> 可把多层全部终止，<code>break</code> 只能终止一层</li>
+</ul>
+<h3 id="3-3-全局变量"><a href="#3-3-全局变量" class="headerlink" title="3.3. 全局变量"></a>3.3. 全局变量</h3><ul>
+<li><p><code>global</code> 本质是表示: 要修改全局变量的内存地址, 所以只有不可变类型需要<code>global</code></p>
+</li>
+<li><p>在函数内部使用全局变量时, 要先声明 <code>global</code> 全局变量, 如果是可变类型就不需要了</p>
+</li>
+<li><p>对于操作全局变量的数据, 如果是通过重新赋值来完成的, 那么必须加上<code>global</code>关键字</p>
+</li>
+</ul>
+<h3 id="3-4-函数参数"><a href="#3-4-函数参数" class="headerlink" title="3.4. 函数参数"></a>3.4. 函数参数</h3><ul>
+<li><p>分类</p>
+<ul>
+<li><p>位置参数：按照位置顺序依次给函数的参数传值</p>
+</li>
+<li><p>关键字参数：按照关键字名给函数的参数传值</p>
+</li>
+</ul>
+<p>注：前面按位置, 后面按关键字, 如果前面用了关键字参数, 后面不能再使用位置参数, 只能使用关键字参数传参</p>
+</li>
+<li><p>不定长参数: 函数的参数个数不确定, 可能0个, 可能多个</p>
+<ul>
+<li>不定长位置参数, <code>*args</code>, 调用函数时所有位置参数都封装成元组, 赋值给<code>args</code></li>
+<li>不定长关键字参数, <code>**kwargs</code>, 调用函数时所有关键字参数都封装成字典, 赋值给<code>kwargs</code></li>
+</ul>
+<p>注: <code>*args</code> 和 <code>**kwargs</code> 这两个参数名可以修改, 但一般不改, 大家习惯了</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">show</span>(<span class="params">name, *args, age=<span class="number">18</span>, **kwargs</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;name:&quot;</span>, name, <span class="string">&quot;age:&quot;</span>, age, <span class="string">&quot;args:&quot;</span>, args, <span class="string">&quot;kwargs:&quot;</span>, kwargs)</span><br><span class="line">show(<span class="string">&quot;李四&quot;</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;a&quot;</span>, a=<span class="number">1</span>, b=<span class="number">2</span>, age=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># name: 李四 age: 20 args: (1, 2, &#x27;a&#x27;) kwargs: &#123;&#x27;a&#x27;: 1, &#x27;b&#x27;: 2&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>拆包</strong>：使用不同变量保存容器类型中的每个数据，对应的变量和数据数量要保持一致致</p>
+<ul>
+<li><p>容器类型如:字符串, 列表, 元组, 字典, range, 集合(set) 都可以利用拆包, 容器类型可以使用变量保存不同的数据</p>
+</li>
+<li><p><code>*my_tuple</code>: 对元组&#x2F;列表进行拆包, 也就是把元组&#x2F;列表里每个数据按位置参数进行传参</p>
+</li>
+<li><p><code>**my_dict</code>: 对字典进行拆包, 也就是把字典里面的每一个键值对按关键字的方式进行传参</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-匿名函数"><a href="#3-5-匿名函数" class="headerlink" title="3.5. 匿名函数"></a>3.5. 匿名函数</h3><p>定义：没有名字的函数, 就是匿名函数, 匿名函数返回值不需要 <code>return</code>，用<code> lambda</code> 定义</p>
+<p>格式:  <code>lambda [形参1], [形参2], ... : [单行表达式] 或 [函数调用]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_func = <span class="keyword">lambda</span> a: <span class="built_in">print</span>(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_func(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-6-常见函数定义"><a href="#3-6-常见函数定义" class="headerlink" title="3.6. 常见函数定义"></a>3.6. 常见函数定义</h3><ul>
+<li>递归函数: 在一个函数内调用的是函数本身, 这样的函数称为递归函数</li>
+<li>函数嵌套：python中, 可以在函数内部再定义一个函数, 称为函数的嵌套（例：装饰器）</li>
+<li>高阶函数：函数的参数或者返回值是一个函数类型, 那么这样的函数就叫高阶函数（例：装饰器）</li>
+</ul>
+<h2 id="4-文件"><a href="#4-文件" class="headerlink" title="4. 文件"></a>4. 文件</h2><h3 id="4-1-常识"><a href="#4-1-常识" class="headerlink" title="4.1. 常识"></a>4.1. 常识</h3><ul>
+<li><p>在windows的python解释器里面, 打开文件默认的编码格式是 <code>gbk</code> 的</p>
+</li>
+<li><p>在mac和linux的解释器里面, 打开文件默认的编码格式是 <code>utf-8</code> 的</p>
+</li>
+<li><p><code>utf-8</code> 一个汉字占用三个字节, 一个字母占1个字节</p>
+</li>
+<li><p>编码:  <code>.encode(&quot;utf-8&quot;)</code></p>
+</li>
+<li><p>解码:  <code>.decode(&quot;utf-8&quot;)</code></p>
+</li>
+</ul>
+<h2 id="5-面向对象"><a href="#5-面向对象" class="headerlink" title="5. 面向对象"></a>5. 面向对象</h2><blockquote>
+<p>面向对象就是对面向过程的封装</p>
+<p><strong>面向对象的三大特性</strong></p>
+<p><strong>封装:</strong> 把属性和方法放到类里面的操作就是封装, 封装可以控制属性和方法的访问权限</p>
+<p><strong>继承:</strong> 子类可以使用父类的方法或者属性, 提高了代码的复用性, 注意点: 父类的功能满足不了子类的需要, 重写父类的方法</p>
+<p><strong>多态:</strong> </p>
+<ul>
+<li>对象调用同一个方法会出现不同的表现形式(表现结果)</li>
+<li>多态的好处, 代码的可扩展性强, 代码兼容性强, 不关系类型, 只关系对象是否具有指定功能方法</li>
+</ul>
+</blockquote>
+<h3 id="5-0-类的实例化过程"><a href="#5-0-类的实例化过程" class="headerlink" title="5.0. 类的实例化过程"></a>5.0. 类的实例化过程</h3><ol>
+<li><p>内存分配：Python为对象分配所需的内存空间。</p>
+</li>
+<li><p>初始化实例：调用类的__init__方法来初始化实例。__init__方法是类中一个特殊的方法，它在实例化对象时被自动调用。</p>
+</li>
+<li><p>创建对象引用：创建一个指向该实例的引用，允许你通过变量来访问该实例。</p>
+</li>
+<li><p>执行__new__方法（可选）：如果定义了__new__方法，它将在__init__之前被调用。__new__方法负责创建实例。</p>
+</li>
+<li><p>返回实例：返回一个指向新实例的引用，使你可以使用该引用来操作该实例。</p>
+</li>
+</ol>
+<p>总结起来，实例化一个类时，Python会为对象分配内存空间，然后调用__init__方法初始化实例，最后返回新实例的引用。这样，就可以通过该引用来操作和访问该实例的属性和方法。</p>
+<h3 id="5-1-魔法方法"><a href="#5-1-魔法方法" class="headerlink" title="5.1. 魔法方法"></a>5.1. 魔法方法</h3><p><strong>定义</strong>：方法名前后都有两个下划线, 这样的方法称为魔法方法, 魔法方法具有一定的特殊功能</p>
+<p><strong>常见魔法方法</strong>：</p>
+<ul>
+<li><p><code>__new__</code> 分配内存的方法, 在<code>__init__</code>之前调用</p>
+</li>
+<li><p><code>__init__</code>, 在创建一个对象时默认被调用,不需要手动调用, 可以在此方法内添加对象属性</p>
+</li>
+<li><p><code>__del__</code>, 创建对象后, python解释器默认调用<code>__init__</code>方法, 当删除对象时, python解释器也会默认调用<code>__del__</code>方法</p>
+</li>
+<li><p><code>__str__</code>, 当使用<code>print</code>输出对象的时候, 默认打印对象的内存地址, 如果类定义了此方法,那么就会打印从在这个方法中<code>return</code>的数据, 此方法返回必须是字符串类型, 作为这个对象的描述信息. </p>
+</li>
+<li><p><code>__slots__</code>方法, 限定自定义类型的的对象只能绑定某些属性, 只对当前类对象生效, 对子类并不起任何作用</p>
+</li>
+<li><p><code>__enter__</code>表示上文方法，需要返回一个操作文件对象</p>
+</li>
+<li><p><code>__exit__</code>表示下文方法，with语句执行完成会自动执行，即使出现异常也会执行该方法</p>
+</li>
+</ul>
+<p><strong>对象销毁的方式</strong>:</p>
+<ul>
+<li><p>程序运行结束, 程序中所使用对象都要在内存中销毁</p>
+</li>
+<li><p>当对象没有变量使用的时候, 该对象就会被销毁, 引用计数为0时会销毁</p>
+</li>
+</ul>
+<h3 id="5-2-继承"><a href="#5-2-继承" class="headerlink" title="5.2. 继承"></a>5.2. 继承</h3><p><strong>语法</strong>：<code>class 子类名(父类名):</code>  &#x2F; <code>class 子类名(父类1, 父类2):</code></p>
+<p><strong>说明</strong>：子类复用父类里面的属性或方法,  提高代码的复用性,  能够使用父类里面的方法或者属性, 包括<code>__init__</code>方法</p>
+<p><strong>常识：</strong></p>
+<ul>
+<li><p>父类也称为基类,  子类也称为派生类</p>
+</li>
+<li><p>单继承：子类只继承一个父类</p>
+</li>
+<li><p>多继承：子类继承多个父类, 可以使用多个父类里的方法</p>
+<ul>
+<li><code>.mro()</code>  方法可查看类的继承顺序</li>
+</ul>
+</li>
+<li><p>多层继承：只要有类继承关系, 子类对父类及所有上层父类的方法都可以使用</p>
+</li>
+<li><p>继承后方法的调用：先从本类查找, 依次往后查找, 找到就停, 如果没找到对应方法, 程序崩溃</p>
+</li>
+<li><p>重写：子类继承父类, 对父类的功能方法进行重新改造（子类方法名要和父类方法名相同）</p>
+</li>
+</ul>
+<p><strong>子类调用父类方法：</strong></p>
+<ul>
+<li><p><code>self.方法()</code> : 当子类没有这个方法时候才可以用, 子类有相同方法时用<code>父类的类名.方法(self)</code></p>
+</li>
+<li><p><code>父类的类名.方法(self)</code> :  类名调用对象方法, 需要自己手动传入self参数, 对象调用对象方法, 不需要传self参数</p>
+</li>
+<li><p><code>super().方法()</code> :  <code>super</code>是一个类, <code>super()</code>表示创建了一个父类对象, 通过<code>__init__</code>方法给对象添加属性 </p>
+<ul>
+<li><p>完整写法 <code>super(子类名称, self).父类方法()</code>  : 指定类名, 根据子类获取对应父类</p>
+</li>
+<li><p>super本质: 根据指定类 在类的继承顺序**类名.mro()**中获取下一个类, 然后调用下一个类的方法, 如果是单继承, super的调用可以认为是调用的是父类的方法</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-3-私有权限"><a href="#5-3-私有权限" class="headerlink" title="5.3. 私有权限"></a>5.3. 私有权限</h3><ol>
+<li>在属性名和方法名前加两个下划线</li>
+<li>私有属性和私有方法只能在本类中使用, 不能在类外部使用</li>
+<li>其实私有属性及方法只是对属性名和方法名进行了包装, 把名字进行了修改</li>
+<li>总结: 私有属性和方法 的包装格式: 在属性名和方法名前面加 <code>_本类类名__</code></li>
+<li>子类无法使用父类的私有属性和私有方法, 也是把名字做了包装, 同上</li>
+<li>给对象添加私有属性只能在<code>__init__</code>方法里面完成</li>
+</ol>
+<h3 id="5-4-类属性和实例属性"><a href="#5-4-类属性和实例属性" class="headerlink" title="5.4. 类属性和实例属性"></a>5.4. 类属性和实例属性</h3><ul>
+<li><p><strong>类属性</strong>: 在类的内部init方法外部定义的属性, 类属性属于类</p>
+</li>
+<li><ul>
+<li><strong>私有类属性</strong>: 类名前加两个下划线, 也是把名字做了包装, 实际同对象的私有</li>
+</ul>
+</li>
+<li><p><strong>实例属性</strong>: 在init方法内部定义的属性称为实例属性, 实例属性属于实例  (实例 &#x3D;&#x3D; 对象)</p>
+</li>
+<li><p><strong>类不能访问对象属性, 但是对象可以访问类属性(对象不能修改类属性, 只能类去修改)</strong></p>
+</li>
+<li><p><strong>总结</strong>: 对象属性的操作是由对象完成, 类属性操作由类来完成, 只不过对象可以访问类属性(也可以用 <strong>self.<strong>class</strong>.类属性</strong> 修改类属性, 用class找到类然后是类去修改类属性), 类不能访问对象属性</p>
+</li>
+</ul>
+<h3 id="5-5-类中方法的种类"><a href="#5-5-类中方法的种类" class="headerlink" title="5.5. 类中方法的种类"></a>5.5. 类中方法的种类</h3><ul>
+<li><p><strong>实例方法</strong>: 方法的第一个参数是self, 那么这样的方法就是对象方法, self表示当前对象, 实例方法, 类不能调用</p>
+</li>
+<li><p><strong>类方法</strong>(修改和获取类的私有属性时使用): 方法第一参数cls并且还需要使用<code>@classmethod</code>的关键字进行修饰, cls表示当前类, 类方法可以获取和修改类的私有属性, 类方法类和对象都可以调用</p>
+</li>
+<li><p><strong>静态方法</strong>: 方法里没有self和cls参数并且还需要使用<code>@staticmethod</code>的关键字进行修饰</p>
+</li>
+</ul>
+<h2 id="6-异常与模块"><a href="#6-异常与模块" class="headerlink" title="6. 异常与模块"></a>6. 异常与模块</h2><h3 id="6-1-异常"><a href="#6-1-异常" class="headerlink" title="6.1. 异常"></a>6.1. 异常</h3><p><strong>异常捕获 try…except…</strong></p>
+<ul>
+<li>try 表示尝试执行可能出问题的代码, except 表示如果代码出现异常, 进行捕获 as e:</li>
+<li>捕获异常类型的通用写法就是用Exception,  因为大多数异常类型都是最终继承Exception的</li>
+<li>BaseException 可以捕获任何异常</li>
+</ul>
+<p><strong>try…except…else…finally</strong></p>
+<ul>
+<li><code>except</code> 与 <code>else</code> 互斥,  <code>finally</code>不管有没有异常都执行</li>
+</ul>
+<p><strong>异常的传递</strong></p>
+<ul>
+<li>当执行代码的时候遇到错误, 首先判断当前代码块对异常进行捕获, 如果没有, 那么再把异常一层一层往外传递, 如果外界的都没对异常的捕获, 程序就会崩溃, 如果有异常捕获, 就不会崩溃了</li>
+</ul>
+<p><strong>自定义异常</strong></p>
+<ul>
+<li>class定义自定义异常类, 必须继承Exception或者BaseException才可以</li>
+<li>抛出自定义异常使用关键字raise</li>
+<li>注意:raise只能抛出异常类的对象</li>
+</ul>
+<h3 id="6-2-模块"><a href="#6-2-模块" class="headerlink" title="6.2. 模块"></a>6.2. 模块</h3><p> <strong>通俗理解模块就是一个 .py 文件, 模块里面可以定义具体的功能代码(类, 函数, 全局变量, 匿名函数等等)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看导入模块的搜索路径 </span></span><br><span class="line"><span class="keyword">import</span> sys </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(sys.path)       </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模块好比一个工具箱, 模块里的每一个具体代码好比一个工具</li>
+<li>模块的命名规则和变量名的命名规则一样 使用下划线命名</li>
+<li>模块名的组成和变量名组成一样, 字母, 数字, 下划线开头, 如果以数字开头, 这个模块就不能使用了</li>
+</ul>
+<p><strong>导入模块的两种方式</strong></p>
+<ul>
+<li>import 模块名  as 别名</li>
+<li>from 模块名 import 功能代码(函数, 类, 全局变量)   as 别名</li>
+<li>from 模块名 import *  导入模块里所有功能代码 一般不这样使用</li>
+</ul>
+<p><strong>导入模块注意点</strong></p>
+<ul>
+<li>自制的模块名不要和系统的模块重名</li>
+<li>使用from 模块名 import 功能, 在当前模块不要再定义导入功能的代码, 否则会覆盖之前导入功能代码</li>
+</ul>
+<p><strong>自制模块</strong></p>
+<ul>
+<li><strong>all</strong> 指定导入对应的功能代码  <strong>all</strong> &#x3D; [类名, 类名…..]  all定义针对外界使用from 模块名 import * 导入,  只能导入all里面指定的功能代码</li>
+</ul>
+<p><strong>主模块名字</strong>: <strong>main</strong>  </p>
+<p><strong>导入的模块名字</strong>:  就是模块原本的名字</p>
+<p><strong>包:</strong> <strong>通俗理解只要文件夹里包含一个__init__.py文件, 那么这个文件夹就是包</strong></p>
+<ul>
+<li><p>包的作用: 包是用来管理不同模块的 </p>
+</li>
+<li><p>模块的作用: 模块是用来管理不同功能代码的</p>
+</li>
+<li><p>包名的命名规则和变量名一样, 使用下划线命名法</p>
+</li>
+<li><p>包名的组成和变量名的组成一样, 数字, 字母, 下划线 不能数字开头</p>
+</li>
+<li><p><strong>包的特点</strong>:</p>
+</li>
+<li><ul>
+<li>包里面有一个__init__.py文件,这是包的初始化文件, 当且仅当第一次导入包的时候会执行这个文件</li>
+<li><strong>init</strong>.py 其实就是包的象征文件</li>
+<li><strong>init</strong>.py 可以控制模块的导入行为</li>
+<li><strong>init</strong>.py 可以定义类, 函数, 全局变量等代码</li>
+</ul>
+</li>
+</ul>
+<p><strong>包的导入目的使用包里面的模块</strong></p>
+<p><strong>格式</strong>: </p>
+<ul>
+<li>import 包名  指定导入包, 用包调用模块, 使用模块中的功能代码 第一次导入包的时候会默认调用__init__.py  </li>
+<li>import 包名.模块名</li>
+<li>from 包名 import 模块名</li>
+<li>from 包名 import 模块名 as 模块别名</li>
+<li>from 包名 import *      默认不是导入包里所有模块, 需要在__init__.py中使用__all__去指定</li>
+</ul>
+<h1 id="二-高级"><a href="#二-高级" class="headerlink" title="二. 高级"></a>二. 高级</h1><h2 id="1-多任务"><a href="#1-多任务" class="headerlink" title="1. 多任务"></a>1. 多任务</h2><h2 id="2-高级语法"><a href="#2-高级语法" class="headerlink" title="2. 高级语法"></a>2. 高级语法</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/29/%E7%8C%AB%E6%97%A5%E8%AE%B0/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/30/go%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/" rel="next" title="go从入门到放弃">
+      go从入门到放弃 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">一. 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E4%B8%AD%E5%9F%BA"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基中基</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2. 逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3. 比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4. 比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5. 输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.6. 循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-if%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.7.</span> <span class="nav-text">1.7. if三目运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-%E6%B3%A8%E9%87%8A"><span class="nav-number">1.1.8.</span> <span class="nav-text">1.8 注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%B9%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">2. 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%88%97%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%85%83%E7%BB%84"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 元组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%AD%97%E5%85%B8"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E9%9B%86%E5%90%88"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. 集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. 公共方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E5%8F%AF%E5%8F%98%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7. 可变不可变类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">3. 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1. 文档说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2. 返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3. 全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4. 函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5. 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.6. 常见函数定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">4. 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%B8%B8%E8%AF%86"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1. 常识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.</span> <span class="nav-text">5. 面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-0-%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.0. 类的实例化过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.1. 魔法方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E7%BB%A7%E6%89%BF"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.2. 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E7%A7%81%E6%9C%89%E6%9D%83%E9%99%90"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.3. 私有权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E7%B1%BB%E5%B1%9E%E6%80%A7%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.4. 类属性和实例属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.5. 类中方法的种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%BC%82%E5%B8%B8%E4%B8%8E%E6%A8%A1%E5%9D%97"><span class="nav-number">1.6.</span> <span class="nav-text">6. 异常与模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%BC%82%E5%B8%B8"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1. 异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E6%A8%A1%E5%9D%97"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2. 模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E9%AB%98%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">二. 高级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A4%9A%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 多任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%AB%98%E7%BA%A7%E8%AF%AD%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2. 高级语法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">WHASO</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WHASO</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

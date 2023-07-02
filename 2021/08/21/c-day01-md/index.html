@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="download  Windows10下载MinGW  点击页面中的x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z 进行下载 下载完成后把 bin 目录放入系统环境变量即可在终端使用 c++ 命令进行编译 .cpp 源代码    Hello World MyFirstApp  123456#include &lt;iostream&gt;int main(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++day01.md">
+<meta property="og:url" content="http://example.com/2021/08/21/c-day01-md/index.html">
+<meta property="og:site_name" content="whaso&#39;s Blog">
+<meta property="og:description" content="download  Windows10下载MinGW  点击页面中的x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z 进行下载 下载完成后把 bin 目录放入系统环境变量即可在终端使用 c++ 命令进行编译 .cpp 源代码    Hello World MyFirstApp  123456#include &lt;iostream&gt;int main(">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-21T02:52:00.000Z">
+<meta property="article:modified_time" content="2022-02-21T06:20:53.351Z">
+<meta property="article:author" content="WHASO">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/21/c-day01-md/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>c++day01.md | whaso's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="whaso's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">whaso's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/21/c-day01-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WHASO">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whaso's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c++day01.md
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-21 10:52:00" itemprop="dateCreated datePublished" datetime="2021-08-21T10:52:00+08:00">2021-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-21 14:20:53" itemprop="dateModified" datetime="2022-02-21T14:20:53+08:00">2022-02-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/?tdsourcetag=s_pctim_aiomsg"> Windows10下载MinGW </a><ul>
+<li>点击页面中的<code>x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z</code> 进行下载</li>
+<li>下载完成后把 <code>bin</code> 目录放入系统环境变量即可在终端使用 <code>c++</code> 命令进行编译 <code>.cpp</code> 源代码</li>
+</ul>
+</li>
+</ul>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><ul>
+<li><code>MyFirstApp</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Hello World! \n&quot;</span>; <span class="comment">// this will output to the console hello world</span></span><br><span class="line">    system(<span class="string">&quot;pause&gt;0&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 编译</span></span><br><span class="line">g++ .\MyFirstApp.cpp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行</span></span><br><span class="line">.\a.exe</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>换行  <code>\n</code> 或 <code> &lt;&lt; endl;</code></p>
+</li>
+<li><p>编译命令 <code>g++ [source file] -o [output filename]</code></p>
+</li>
+</ul>
+<h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><ul>
+<li>命名<ul>
+<li>构成: 下划线, 字母(区分大小写), 数字(不可数字开头)</li>
+<li>一般用小驼峰命名法</li>
+</ul>
+</li>
+</ul>
+<p><strong>Data types</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+<th>size(bytes)</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>整数</td>
+<td>int</td>
+<td>4</td>
+<td>-2147483648 to 2147483647</td>
+</tr>
+<tr>
+<td>字符</td>
+<td>char</td>
+<td>1</td>
+<td>单引号为字符 ‘a’</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>string</td>
+<td></td>
+<td>双引号为字符串 “character”</td>
+</tr>
+<tr>
+<td>布尔</td>
+<td>bool</td>
+<td>1</td>
+<td>true / false</td>
+</tr>
+<tr>
+<td>浮点数</td>
+<td>float</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td>大浮点数</td>
+<td>double</td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Data type overflow</strong></p>
+<ul>
+<li>变量的值超过其内存空间, 类似钟表指针, 13 点 = 1 点 (INT_MAX + 1 = INT_MIN)</li>
+</ul>
+<p><strong>ASCII table</strong></p>
+<ul>
+<li>asign characters to number (it’s for American)</li>
+<li>ASCII extends: utf-(1-16)  (for others)</li>
+<li>字符转换为ASCII数字 <code>(int)&#39;a&#39;</code> 和 <code>int(&#39;a&#39;)</code> 两种写法</li>
+</ul>
+<h1 id="Condition-Statement"><a href="#Condition-Statement" class="headerlink" title="Condition Statement"></a>Condition Statement</h1><p><strong>语法</strong></p>
+<p><code>if()&#123;&#125;elif()&#123;&#125;else()&#123;&#125;</code></p>
+<ul>
+<li>注: 如果 <code>&#123;&#125;</code> 内只有一行代码, 可以不写 <code>&#123;&#125;</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//User enters side lengths of a triangle (a, b, c)</span></span><br><span class="line">    <span class="comment">//Program should write out whethre that triangle is</span></span><br><span class="line">    <span class="comment">//equilateral, isosceles or scalene</span></span><br><span class="line">    <span class="keyword">float</span> a, b, c;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;a, b, c: &quot;</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (a == b &amp;&amp; b == c)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Equilateral triangle&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a != b &amp;&amp; a != c &amp;&amp; b != c)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Scalene triangle&quot;</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Isosceles triangle&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 执行优先级 从上到下</span></span><br><span class="line">    <span class="comment">// + - * / %</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">1</span> + <span class="number">1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">5</span> / <span class="number">2</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="number">5.0</span> / <span class="number">2</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 2.5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ++, --</span></span><br><span class="line">    <span class="keyword">int</span> counter = <span class="number">7</span>;</span><br><span class="line">    counter++;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; counter &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    counter--;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; counter &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> counter2 = <span class="number">7</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; counter2++ &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 7</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; counter2 &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 8</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ++counter2 &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 9</span></span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;cls&quot;</span>); <span class="comment">// clear console</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// &lt;, &gt;, &lt;=, &gt;=, ==, !=</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; (a &gt; b) &lt;&lt; endl;  // 0 for false (1 for true)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// &amp;&amp;, ||, !</span></span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">8</span>, d = <span class="number">9</span>;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; !(c == 5 &amp;&amp; b == 9);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 优先级</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; (c == <span class="number">8</span> &amp;&amp; d == <span class="number">4</span> + <span class="number">5</span>);  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// =, +=, -=, *=, /=, %=</span></span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">5</span>;</span><br><span class="line">    x += <span class="number">7</span>;  <span class="comment">//same as: x = x + 7</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三目"><a href="#三目" class="headerlink" title="三目"></a>三目</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> hostUserNum, guestUserNum;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;HOST: &quot;</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; hostUserNum;</span><br><span class="line">    system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Guest: &quot;</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; guestUserNum;</span><br><span class="line"></span><br><span class="line">    (hostUserNum == guestUserNum)? <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Correct!&quot;</span>: <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Failed!&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="switch-case"><a href="#switch-case" class="headerlink" title="switch case"></a>switch case</h1><blockquote>
+<p>注意每个case后面必需接break退出, 因为程序只判断一次case条件, 进入一次后, 其他的case不会再判断, 会运行下面的所有case.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> num1, num2;</span><br><span class="line">    <span class="keyword">char</span> operation;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Caculator&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; num1 &gt;&gt; operation &gt;&gt; num2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (operation)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:<span class="built_in">cout</span> &lt;&lt; num1 &lt;&lt; operation &lt;&lt; num2 &lt;&lt; <span class="string">&quot;=&quot;</span> &lt;&lt; num1 - num2;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:<span class="built_in">cout</span> &lt;&lt; num1 &lt;&lt; operation &lt;&lt; num2 &lt;&lt; <span class="string">&quot;=&quot;</span> &lt;&lt; num1 + num2; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:<span class="built_in">cout</span> &lt;&lt; num1 &lt;&lt; operation &lt;&lt; num2 &lt;&lt; <span class="string">&quot;=&quot;</span> &lt;&lt; num1 * num2; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>:<span class="built_in">cout</span> &lt;&lt; num1 &lt;&lt; operation &lt;&lt; num2 &lt;&lt; <span class="string">&quot;=&quot;</span> &lt;&lt; num1 / num2; <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;%&#x27;</span>:</span><br><span class="line">        <span class="keyword">bool</span> isNum1Int, isNum2Int;</span><br><span class="line">        isNum1Int = (<span class="keyword">int</span>(num1) == num1);</span><br><span class="line">        isNum2Int = (<span class="keyword">int</span>(num2) == num2);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isNum1Int &amp;&amp; isNum2Int)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; num1 &lt;&lt; operation &lt;&lt; num2 &lt;&lt; <span class="string">&quot;=&quot;</span> &lt;&lt; <span class="keyword">int</span>(num1) % <span class="keyword">int</span>(num2);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Not valid!&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">default</span>:<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Not valid opeation!&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/26/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85mysql/" rel="prev" title="源码安装mysql">
+      <i class="fa fa-chevron-left"></i> 源码安装mysql
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/20/pycharm2vscode/" rel="next" title="pycharm2vscode.md">
+      pycharm2vscode.md <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#download"><span class="nav-number">1.</span> <span class="nav-text">download</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables"><span class="nav-number">3.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Condition-Statement"><span class="nav-number">4.</span> <span class="nav-text">Condition Statement</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operators"><span class="nav-number">5.</span> <span class="nav-text">Operators</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%9B%AE"><span class="nav-number">6.</span> <span class="nav-text">三目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#switch-case"><span class="nav-number">7.</span> <span class="nav-text">switch case</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">WHASO</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WHASO</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

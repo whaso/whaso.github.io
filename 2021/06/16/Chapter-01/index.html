@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="计算机网络基础Chapter-11. 性能指标速率   即数据率或称数据传输率或比特率     速率（千，兆，吉，太）(kb, Mb, Gb, Tb) 存储容量(KB, MB, GB, TB)（1Byte &#x3D; 8bit）    千 1kb&#x2F;s &#x3D; 10**3 b&#x2F;s 1KB &#x3D; 2**10B &#x3D; 1024B &#x3D; 1024 * 8 b   带宽   指网络的通信线路传送数据的能力， 通常是指单位时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter-01">
+<meta property="og:url" content="http://example.com/2021/06/16/Chapter-01/index.html">
+<meta property="og:site_name" content="whaso&#39;s Blog">
+<meta property="og:description" content="计算机网络基础Chapter-11. 性能指标速率   即数据率或称数据传输率或比特率     速率（千，兆，吉，太）(kb, Mb, Gb, Tb) 存储容量(KB, MB, GB, TB)（1Byte &#x3D; 8bit）    千 1kb&#x2F;s &#x3D; 10**3 b&#x2F;s 1KB &#x3D; 2**10B &#x3D; 1024B &#x3D; 1024 * 8 b   带宽   指网络的通信线路传送数据的能力， 通常是指单位时间">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-16T14:05:05.000Z">
+<meta property="article:modified_time" content="2021-09-08T09:47:44.473Z">
+<meta property="article:author" content="WHASO">
+<meta property="article:tag" content="网络基础">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/16/Chapter-01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Chapter-01 | whaso's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="whaso's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">whaso's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/Chapter-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WHASO">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whaso's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chapter-01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-16 22:05:05" itemprop="dateCreated datePublished" datetime="2021-06-16T22:05:05+08:00">2021-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-08 17:47:44" itemprop="dateModified" datetime="2021-09-08T17:47:44+08:00">2021-09-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计算机网络基础Chapter-1"><a href="#计算机网络基础Chapter-1" class="headerlink" title="计算机网络基础Chapter-1"></a>计算机网络基础Chapter-1</h1><h2 id="1-性能指标"><a href="#1-性能指标" class="headerlink" title="1. 性能指标"></a>1. 性能指标</h2><p><strong>速率</strong></p>
+<ul>
+<li> 即数据率或称数据传输率或比特率</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>速率（千，兆，吉，太）(kb, Mb, Gb, Tb)</th>
+<th>存储容量(KB, MB, GB, TB)（1Byte = 8bit）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>千 1kb/s = 10**3 b/s</td>
+<td>1KB = 2**10B = 1024B = 1024 * 8 b</td>
+</tr>
+</tbody></table>
+<p><strong>带宽</strong></p>
+<ul>
+<li> 指网络的通信线路传送数据的能力， 通常是指单位时间内从网络中的一点到另一点所能通过的 <strong>最高数据率</strong>。</li>
+<li>  单位: <strong>比特每秒</strong>， b/s, kb/s, Mb/s, Gb/s, 网络设备所支持的最高速度</li>
+</ul>
+<p> <strong>吞吐量</strong></p>
+<ul>
+<li>表示<strong>单位时间</strong> 内通过 **某个网络(或信道、接口)**的数据量</li>
+<li>单位： b/s, kb/s, Mb/s等</li>
+<li>吞吐量受网络的带宽或网络的额定速率的限制</li>
+</ul>
+<p> <strong>时延</strong></p>
+<ul>
+<li>指数据（报文/分组/比特流）从网络（或链路）的一端传送到另一端所需的时间，也叫延迟，单位s</li>
+</ul>
+<ul>
+<li>发送时延（传输时延）：从发送分组的第一个比特算起， 到该分组的最后一个比特发送完毕所需的时间</li>
+</ul>
+<p>$$<br>发送时延 = \frac{数据长度}{信道带宽}<br>$$</p>
+<ul>
+<li>传播时延：取决于电磁波的传播速度和链路长度</li>
+</ul>
+<p>$$<br>传播时延 = \frac{信道长度}{3 * 10^8}<br>$$</p>
+<ul>
+<li>排队时延：等待输出/输入链路可用</li>
+<li>处理时延：检错、找出口</li>
+</ul>
+<p><strong>时延带宽积</strong></p>
+<ul>
+<li>又称为 <strong>以比特为单位的链路长度</strong>， 即 某段链路现在有多少比特， 是指链路中某一时刻的比特容量</li>
+</ul>
+<p>$$<br>时延带宽积(bit) = 传播时延(s) \times 带宽 (b/s)<br>$$</p>
+<p><strong>往返时间RTT</strong></p>
+<ul>
+<li>从发送方发送数据开始， 到发送方收到接收方的确认（接收方收到数据后立即发送确认），总共经历的时延<ul>
+<li>如 ping 的time = 33ms</li>
+</ul>
+</li>
+<li>RTT越大，在收到确认之前，可以发送的数据越多</li>
+<li>RTT包括<ul>
+<li>往返传播时延 = 传播时延 * 2</li>
+<li>末端处理时间</li>
+</ul>
+</li>
+</ul>
+<p> <strong>利用率</strong></p>
+<ul>
+<li>信道利用率</li>
+</ul>
+<p>$$<br>信道利用率 = \frac{有数据通过时间}{（有+无）数据通过时间}<br>$$</p>
+<ul>
+<li>网络利用率： 信道利用率加权平均值</li>
+</ul>
+<blockquote>
+<p>加权平均值即将各数值乘以相应的权数，然后加总求和得到总体值，再除以总的单位数。加权平均值的大小不仅取决于总体中各单位的数值（变量值）的大小，而且取决于各数值出现的次数（频数），由于各数值出现的次数对其在平均数中的影响起着权衡轻重的作用，因此叫做权数。</p>
+</blockquote>
+<h2 id="2-分层结构"><a href="#2-分层结构" class="headerlink" title="2. 分层结构"></a>2. 分层结构</h2><ul>
+<li>实体：第n层中的活动元素称为 <strong>n层实体</strong>。同一层的实体叫 <strong>对等实体</strong>。</li>
+<li>协议：为进行网络中的 <strong>对等实体</strong> 数据交换而建立的规则、标准或约定称为网络协议。</li>
+<li>接口（访问服务点SAP）： 上层使用下层服务的入口。</li>
+<li>服务：下层为相邻上层提供的功能调用。</li>
+</ul>
+<h3 id="2-1-OSI参考模型"><a href="#2-1-OSI参考模型" class="headerlink" title="2.1. OSI参考模型"></a>2.1. OSI参考模型</h3><p>目的：支持 <strong>异构网络系统</strong> 的互联互通。</p>
+<p>国际标准化组织（ISO) 于1984年提出开放系统互连（OSI）参考模型。</p>
+<table>
+<thead>
+<tr>
+<th>OSI 七层</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应用层</td>
+<td>数据子网（数据处理）</td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>数据子网（数据处理）</td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>数据子网（数据处理）</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td></td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>通信子网（数据通信）</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>通信子网（数据通信）</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>通信子网（数据通信）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>应用层<ul>
+<li>定义：所有能和用户交互产生网络流量的程序</li>
+<li>典型应用层服务：<ul>
+<li>文件传输：FTP</li>
+<li>电子邮件：SMTP</li>
+<li>万维网：HTTP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表示层<ul>
+<li>定义：用于处理在两个通信系统中交换信息的表示方式（语法和语义）</li>
+<li>功能：<ul>
+<li>数据格式变换</li>
+<li>数据加密解密</li>
+<li>数据压缩和恢复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>会话层<ul>
+<li>定义：向表示层实体/用户进程提供<strong>建立连接</strong>并在连接上<strong>有序地传输</strong>数据。这是会话， 也是<strong>建立同步</strong>（SYN)</li>
+<li>功能：<ul>
+<li>建立、管理、终止会话</li>
+<li>使用校验点可使会话在通信失效时从 <strong>校验点/同步点</strong> 继续恢复通信，实现数据同步。（适用于传输大文件）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>传输层<ul>
+<li>定义：负责该机中 <strong>两个进程</strong> 的通信，即<strong>端到端</strong> 的通信。传输意念是报文段或用户数据报。</li>
+<li>功能：<ul>
+<li>可靠传输、不可靠传输<ul>
+<li>可靠：先建立连接，确认机制，如握手，再传输数据</li>
+<li>不可靠：无建立连接，直接传数据</li>
+</ul>
+</li>
+<li>差错控制</li>
+<li>流量控制</li>
+<li>复用分用<ul>
+<li>复用：多个应用层进程可同时使用下面传输层的服务</li>
+<li>分用：运输层把收到的信息分别交付给上面应用层中相应的进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网络层<ul>
+<li>定义：主要任务是把分组从源端传到目的端，为分组交换网上的不同该机提供通信服务。网络层传输单位是数据报</li>
+<li>功能：<ul>
+<li>路由选择：最佳路径</li>
+<li>流量控制：限制发送端</li>
+<li>差错控制</li>
+<li>拥塞控制：若所有结点都来不及接受分组，而要丢弃大量分组的话，网络就处于拥塞状态。因此要采取一定措施，缓解这种拥塞。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据链路层<ul>
+<li>定义：主要任务是把网络层传下来的数据报组装成帧。传输单位是帧。</li>
+<li>功能：<ul>
+<li>成帧（定义帧的开始和结束）</li>
+<li>差错控制：帧错+位错</li>
+<li>流量控制：限制发送端速度</li>
+<li>访问（接入）控制：控制对信道的访问</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>物理层<ul>
+<li>定义：主要任务是在物理媒体上实现比特流的透明传输。传输单位是比特。</li>
+<li>透明传输：指不管所传数据是什么样的比特组合，都应当能够在链路上传送。</li>
+<li>功能：<ul>
+<li>定义接口特性</li>
+<li>定义传输模式<ul>
+<li>单工、半双工、双工</li>
+</ul>
+</li>
+<li>定义传输速率</li>
+<li>比特同步</li>
+<li>比特编码：用什么电压表示1， 什么电压表示0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-TCP-IP模型"><a href="#2-2-TCP-IP模型" class="headerlink" title="2.2. TCP/IP模型"></a>2.2. TCP/IP模型</h3><table>
+<thead>
+<tr>
+<th>TCP/IP 四层</th>
+<th>协议栈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应用层</td>
+<td>HTTP，FTP，DNS，SMTP</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>TCP，UDP</td>
+</tr>
+<tr>
+<td>网际层</td>
+<td>IP</td>
+</tr>
+<tr>
+<td>网络接口层</td>
+<td>Ethernet, ATM, Frame Relay</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-OSI与TCP-IP对比"><a href="#2-3-OSI与TCP-IP对比" class="headerlink" title="2.3. OSI与TCP/IP对比"></a>2.3. OSI与TCP/IP对比</h3><ul>
+<li>相同点<ul>
+<li>都分层</li>
+<li>基于独立的协议栈的概念</li>
+<li>可以实现异构网络互联</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>OSI定义三点：服务、协议、接口</li>
+<li>OSI先出现，参考模型先于协议发明，不偏向特定协议</li>
+<li>TCP/IP设计之初就考虑到异构网互联问题，将IP作为重要层次</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>OSI</th>
+<th>TCP/IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>网络层</td>
+<td>无连接 + 面向连接</td>
+<td>无连接</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>面向连接</td>
+<td>无连接 + 面向连接</td>
+</tr>
+</tbody></table>
+<p><strong>面向连接</strong>分为三个阶段：</p>
+<ol>
+<li>建立连接，在此阶段，发出一个建立连接的请求。</li>
+<li>只有连接成功建立之后，才能开始传输数据， 这是第二阶段</li>
+<li>当数据传输完毕必须释放连接</li>
+</ol>
+<p><strong>无连接</strong>直接进行数据传输</p>
+<h3 id="2-4-5层参考模型"><a href="#2-4-5层参考模型" class="headerlink" title="2.4. 5层参考模型"></a>2.4. 5层参考模型</h3><table>
+<thead>
+<tr>
+<th>5层参考模型</th>
+<th>说明</th>
+<th>协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应用层</td>
+<td>支持各种网络应用</td>
+<td>FTP、SMTP、HTTP</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>进程-进程的数据传输</td>
+<td>TCP、UDP</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>源主机到目的主机的数据分组路由与转发</td>
+<td>IP、ICMP、OSPF</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>把网络层传下来的数据报组装成帧</td>
+<td>Ethernet、PPP</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>比特传输</td>
+<td></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" rel="tag"># 网络基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/03/%E9%85%8D%E7%BD%AEfrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="prev" title="配置frp内网穿透">
+      <i class="fa fa-chevron-left"></i> 配置frp内网穿透
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/22/Chapter-02/" rel="next" title="Chapter-02">
+      Chapter-02 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80Chapter-1"><span class="nav-number">1.</span> <span class="nav-text">计算机网络基础Chapter-1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">1. 性能指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">2. 分层结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-OSI%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. OSI参考模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-TCP-IP%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. TCP&#x2F;IP模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-OSI%E4%B8%8ETCP-IP%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. OSI与TCP&#x2F;IP对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-5%E5%B1%82%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 5层参考模型</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">WHASO</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WHASO</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

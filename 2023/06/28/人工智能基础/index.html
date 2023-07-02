@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="人工智能基础1. 概述1.1. 人工智能起源 图灵测试 达特茅斯会议  1.2. 人工智能三个阶段 1980年代是正式成形期 1990-2010年代是蓬勃发展期 2012年之后是深度学习期  1.3. 人工智能、机器学习和深度学习 机器学习是人工智能的一个实现途径 深度学习是机器学习的一个方法发展而来  1.4. 主要分支 计算机视觉 CV 人脸识别   自然语言处理 NLP 语音识别 语义识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="whaso&#39;s Blog">
+<meta property="og:url" content="http://example.com/2023/06/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="whaso&#39;s Blog">
+<meta property="og:description" content="人工智能基础1. 概述1.1. 人工智能起源 图灵测试 达特茅斯会议  1.2. 人工智能三个阶段 1980年代是正式成形期 1990-2010年代是蓬勃发展期 2012年之后是深度学习期  1.3. 人工智能、机器学习和深度学习 机器学习是人工智能的一个实现途径 深度学习是机器学习的一个方法发展而来  1.4. 主要分支 计算机视觉 CV 人脸识别   自然语言处理 NLP 语音识别 语义识别">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-28T11:01:42.921Z">
+<meta property="article:modified_time" content="2023-06-29T06:25:47.924Z">
+<meta property="article:author" content="WHASO">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | whaso's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="whaso's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">whaso's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/28/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WHASO">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whaso's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-28 19:01:42" itemprop="dateCreated datePublished" datetime="2023-06-28T19:01:42+08:00">2023-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-29 14:25:47" itemprop="dateModified" datetime="2023-06-29T14:25:47+08:00">2023-06-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="人工智能基础"><a href="#人工智能基础" class="headerlink" title="人工智能基础"></a>人工智能基础</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><h3 id="1-1-人工智能起源"><a href="#1-1-人工智能起源" class="headerlink" title="1.1. 人工智能起源"></a>1.1. 人工智能起源</h3><ul>
+<li>图灵测试</li>
+<li>达特茅斯会议</li>
+</ul>
+<h3 id="1-2-人工智能三个阶段"><a href="#1-2-人工智能三个阶段" class="headerlink" title="1.2. 人工智能三个阶段"></a>1.2. 人工智能三个阶段</h3><ul>
+<li>1980年代是正式成形期</li>
+<li>1990-2010年代是蓬勃发展期</li>
+<li>2012年之后是深度学习期</li>
+</ul>
+<h3 id="1-3-人工智能、机器学习和深度学习"><a href="#1-3-人工智能、机器学习和深度学习" class="headerlink" title="1.3. 人工智能、机器学习和深度学习"></a>1.3. 人工智能、机器学习和深度学习</h3><ul>
+<li>机器学习是人工智能的一个实现途径</li>
+<li>深度学习是机器学习的一个方法发展而来</li>
+</ul>
+<h3 id="1-4-主要分支"><a href="#1-4-主要分支" class="headerlink" title="1.4. 主要分支"></a>1.4. 主要分支</h3><ul>
+<li>计算机视觉 CV<ul>
+<li>人脸识别</li>
+</ul>
+</li>
+<li>自然语言处理 NLP<ul>
+<li>语音识别</li>
+<li>语义识别</li>
+</ul>
+</li>
+<li>机器人</li>
+</ul>
+<h3 id="1-5-人工智能必备三要素"><a href="#1-5-人工智能必备三要素" class="headerlink" title="1.5. 人工智能必备三要素"></a>1.5. 人工智能必备三要素</h3><ul>
+<li>数据</li>
+<li>算法</li>
+<li>计算力</li>
+</ul>
+<h3 id="1-6-GPU、CPU"><a href="#1-6-GPU、CPU" class="headerlink" title="1.6. GPU、CPU"></a>1.6. GPU、CPU</h3><ul>
+<li>GPU – 计算密集型</li>
+<li>CPU  –  IO密集型</li>
+</ul>
+<h2 id="2-机器学习"><a href="#2-机器学习" class="headerlink" title="2. 机器学习"></a>2. 机器学习</h2><h3 id="2-1-工作流程"><a href="#2-1-工作流程" class="headerlink" title="2.1. 工作流程"></a>2.1. 工作流程</h3><ol>
+<li>数据获取</li>
+</ol>
+<p>数据类型构成</p>
+<ul>
+<li>特征值 + 目标值（目标值分为离散还是连续）</li>
+<li>仅有特征值，无目标值</li>
+</ul>
+<p>数据划分</p>
+<ul>
+<li>训练集 0.7~0.8</li>
+<li>测试集 0.2~0.3</li>
+</ul>
+<ol start="2">
+<li>数据基本处理</li>
+</ol>
+<blockquote>
+<p>对数据进行缺失值、去除异常值等处理</p>
+</blockquote>
+<ol start="3">
+<li>特征工程</li>
+</ol>
+<blockquote>
+<p>把数据转换为机器更容易识别的数据</p>
+<p>数据和特征决定了机器学习的上限，模型和算法只是逼近这个上限而已</p>
+</blockquote>
+<ul>
+<li>特征提取</li>
+<li>特征预处理</li>
+<li>特征降维</li>
+</ul>
+<ol start="4">
+<li>机器学习（模型训练）</li>
+</ol>
+<blockquote>
+<p>选择合适的算法对模型进行训练</p>
+</blockquote>
+<ol start="5">
+<li>模型评估</li>
+</ol>
+<blockquote>
+<p>对训练好的模型进行评估</p>
+</blockquote>
+<h3 id="2-2-机器学习算法分类"><a href="#2-2-机器学习算法分类" class="headerlink" title="2.2. 机器学习算法分类"></a>2.2. 机器学习算法分类</h3><ul>
+<li>监督学习：有特征值，有目标值<ul>
+<li>目标值连续：回归</li>
+<li>目标值离散：分类</li>
+</ul>
+</li>
+<li>无监督学习：仅有特征值</li>
+<li>半监督学习：有特征值，但一部分数据有目标值 ，一部分没有</li>
+<li>强化学习：即自动进行决策，并可以做连续决策<ul>
+<li>动态过程，上一步的输出是下一步的输入</li>
+<li>四要素：agent, action, environment, reward</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-模型评估"><a href="#2-3-模型评估" class="headerlink" title="2.3. 模型评估"></a>2.3. 模型评估</h3><ul>
+<li><p>分类模型评估</p>
+<ul>
+<li>准确率：预测正确的数占样本总数的比例</li>
+<li>精确率：预测为正的数占全部预测为正的比例</li>
+<li>召回率： 预测为正占全部正样本的比例</li>
+<li>F1-score：主要用于评估模型的稳健性</li>
+<li>AUC指标：主要用于评估样本不均衡的情况</li>
+</ul>
+</li>
+<li><p>回归模型评估</p>
+<blockquote>
+<p>p &#x3D; predicted target</p>
+<p>a &#x3D; actual target</p>
+</blockquote>
+<ul>
+<li>均方根误差(Root Mean Squared Error, RMSE)</li>
+<li>相对平方误差(Relative Squared Error, RSE)</li>
+<li>平均绝对误差(Mean Absolute Error, MAE)</li>
+<li>相对绝对误差(Relative Absolute Error, RAE)</li>
+<li>决定系数(Coefficient of Determination)</li>
+</ul>
+</li>
+<li><p>拟合度（评估结果）</p>
+<ul>
+<li>欠拟合：学习到的特征太少（有两个眼睛的就是人）</li>
+<li>过拟合：学习到的特征太多（仅黄皮肤的才是人）</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-机器学习环境配置"><a href="#3-机器学习环境配置" class="headerlink" title="3. 机器学习环境配置"></a>3. 机器学习环境配置</h2><h3 id="3-1-环境安装"><a href="#3-1-环境安装" class="headerlink" title="3.1. 环境安装"></a>3.1. 环境安装</h3><ul>
+<li>创建虚拟环境： <code>conda create --name=ai0 python=3.10</code></li>
+<li>安装相关包：<ul>
+<li>matplotlib&#x3D;&#x3D;2.2.2</li>
+<li>numpy&#x3D;&#x3D;1.14.2</li>
+<li>pandas&#x3D;&#x3D;0.20.3</li>
+<li>tables&#x3D;&#x3D;3.4.2</li>
+<li>jupyter&#x3D;1.0.0</li>
+</ul>
+</li>
+<li>先从cmd进入指定目录后执行<code>jupyter notebook</code></li>
+</ul>
+<h3 id="3-2-jupyter基操"><a href="#3-2-jupyter基操" class="headerlink" title="3.2. jupyter基操"></a>3.2. jupyter基操</h3><blockquote>
+<p>类似vim, 分不同的输入模式，命令也和vim基本相同</p>
+</blockquote>
+<ul>
+<li>两种模式通用快捷键<ul>
+<li><code>Shift + Enter</code>  执行本单元代码，跳转到下一单元</li>
+<li><code>Ctrl + Enter</code> 执行本单元代码，留在本单元</li>
+</ul>
+</li>
+<li><strong>命令模式</strong>：按 <code>ESC</code>  进入<ul>
+<li><code>Y</code>, cell 切换到Code模式</li>
+<li><code>M</code>, cell 切换到Markdown模式</li>
+<li><code>A</code>, 在当前cell上面添加cell</li>
+<li><code>B</code>, 在当前cell下面添加cell</li>
+<li><code>DD</code>, 删除当前cell</li>
+<li><code>Z</code>, 回退</li>
+<li><code>L</code>, 为当前cell加上行号&lt;!–</li>
+<li><code>Ctrl+Shift+P</code>, 对话框输入命令直接运行</li>
+<li><code>Ctrl+Home</code>, 跳转到首个cell</li>
+<li><code>Ctrl+End</code>, 跳转到末个cell</li>
+</ul>
+</li>
+<li><strong>编辑模式</strong>: 按 <code>Enter</code> 进入<ul>
+<li><code>Ctrl + 点击</code>, 多光标操作</li>
+<li><code>Ctrl + Z</code>, 回退</li>
+<li><code>Ctrl + Y</code>, 重做</li>
+<li><code>TAB</code>,  代码补全</li>
+<li><code>Ctrl + /</code> 注释&#x2F;取消注释</li>
+<li><code>代码后 + ;</code>  屏蔽输出</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-Matplotlib"><a href="#4-Matplotlib" class="headerlink" title="4. Matplotlib"></a>4. Matplotlib</h2><blockquote>
+<p>用于开发2D、3D图表</p>
+<p>使用简单，以渐进、交互式实现数据可视化</p>
+</blockquote>
+<h3 id="4-1-三层结构"><a href="#4-1-三层结构" class="headerlink" title="4.1. 三层结构"></a>4.1. 三层结构</h3><ul>
+<li><strong>容器层</strong><ul>
+<li>Canvas: 最底层的系统层，充当画板角色，即放置画布(Figure)的工具</li>
+<li>Figure: <code>Canvas</code>上第一层，充当画布角色 </li>
+<li>Axes：应用层的第二层，在绘图过程中相当于画布上的绘图区的角色<ul>
+<li>Axes: 坐标系，数据的绘图区域</li>
+<li>Axis: 坐标轴</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>辅助显示层</strong>：为Axes内除了根据数据绘制出的图像以外的内容，主要包括<code>facecolor(Axes外观)</code>、<code>spines(边框线)</code>、<code>axis(坐标轴)</code> 、<code>axix lable(坐标轴名称)</code>、<code>tick(坐标轴刻度)</code>、<code>tick lable(坐标轴刻度标签)</code>、<code>gird(网格线)</code>、<code>legend(图例)</code>、<code>title(标题)</code>等</li>
+<li><strong>图像层</strong>：指<code>Axes</code>内通过 <code>plot</code>, <code>scatter</code>, <code>histogram</code>, <code>pie</code>等函数根据数据绘制出的图像。</li>
+</ul>
+<h3 id="4-2-折线图与基操"><a href="#4-2-折线图与基操" class="headerlink" title="4.2. 折线图与基操"></a>4.2. 折线图与基操</h3><blockquote>
+<p><code>help(plt.figure)</code> 查看命令帮助</p>
+<p>负号报错 plt.rcParams[“axes.unicode_minus”]&#x3D;False 加这句</p>
+<p>中文乱码，需要把系统使用的中文字体对应的英文名称添加到matplotlib配置中 matplotlib.matplotlib_fname()  可查到是 matplotlib&#x2F;mpl-data&#x2F;matplotlibrc 此文件，查 #font.sans-serif 解注释并把英文字体名加到第一个位置</p>
+</blockquote>
+<p><strong>Hello World</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.创建画布</span></span><br><span class="line">plt.figure()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.图像绘制</span></span><br><span class="line">x = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>)]</span><br><span class="line">y = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, <span class="number">8</span>)]</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.1. 图像保存, 要放到show前</span></span><br><span class="line">plt.savefig()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.显示图像</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>基操</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 0.生成数据</span></span><br><span class="line">x = <span class="built_in">range</span>(<span class="number">60</span>)</span><br><span class="line">y_peking = [random.uniform(<span class="number">10</span>, <span class="number">15</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line">y_shanghai = [random.uniform(<span class="number">15</span>, <span class="number">25</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 创建画布</span></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>, <span class="number">8</span>), dpi=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.图形绘制</span></span><br><span class="line">plt.plot(x, y_peking, color=<span class="string">&quot;r&quot;</span>, label=<span class="string">&quot;北京&quot;</span>, linestyle=<span class="string">&quot;dashed&quot;</span>)</span><br><span class="line">plt.plot(x, y_shanghai, label=<span class="string">&quot;上海&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.1. 添加x,y刻度</span></span><br><span class="line">x_ticks_labels = [<span class="string">f&quot;11点<span class="subst">&#123;i&#125;</span>&quot;</span> <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line">y_ticks = <span class="built_in">range</span>(<span class="number">40</span>)</span><br><span class="line"></span><br><span class="line">plt.yticks(y_ticks[::<span class="number">5</span>])</span><br><span class="line">plt.xticks(x[::<span class="number">5</span>], x_ticks_labels[::<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.2. 添加网络信息</span></span><br><span class="line"><span class="comment"># 参数：linestyle: 绘制网格的方式，alpha:透明度</span></span><br><span class="line">plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&quot;-&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.3. 添加描述</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;时间&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;温度&quot;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;中午11：00到12：00温度变化&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.4. 显示图例, 需要在显示前声明plot里面的值</span></span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 图像显示</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><strong>多个坐标系图像显示</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个坐标系显示图像</span></span><br><span class="line"><span class="comment"># 0.生成数据</span></span><br><span class="line">x = <span class="built_in">range</span>(<span class="number">60</span>)</span><br><span class="line">y_peking = [random.uniform(<span class="number">10</span>, <span class="number">15</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line">y_shanghai = [random.uniform(<span class="number">15</span>, <span class="number">25</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 创建画布</span></span><br><span class="line"><span class="comment"># plt.figure(figsize=(20, 8), dpi=100)</span></span><br><span class="line">fig, axes = plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">2</span>, figsize=(<span class="number">20</span>, <span class="number">8</span>), dpi=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.图形绘制</span></span><br><span class="line"><span class="comment"># plt.plot(x, y_peking, color=&quot;r&quot;, label=&quot;北京&quot;, linestyle=&quot;dashed&quot;)</span></span><br><span class="line"><span class="comment"># plt.plot(x, y_shanghai, label=&quot;上海&quot;)</span></span><br><span class="line">axes[<span class="number">0</span>].plot(x, y_peking, color=<span class="string">&quot;r&quot;</span>, label=<span class="string">&quot;北京&quot;</span>, linestyle=<span class="string">&quot;dashed&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].plot(x, y_shanghai, label=<span class="string">&quot;上海&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.1. 添加x,y刻度</span></span><br><span class="line">x_ticks_labels = [<span class="string">f&quot;11点<span class="subst">&#123;i&#125;</span>&quot;</span> <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br><span class="line">y_ticks = <span class="built_in">range</span>(<span class="number">40</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.yticks(y_ticks[::5])</span></span><br><span class="line"><span class="comment"># plt.xticks(x[::5], x_ticks_labels[::5])</span></span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_xticks(x[::<span class="number">5</span>])</span><br><span class="line">axes[<span class="number">0</span>].set_yticks(y_ticks[::<span class="number">5</span>])</span><br><span class="line">axes[<span class="number">0</span>].set_xticklabels(x_ticks_labels[::<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">axes[<span class="number">1</span>].set_xticks(x[::<span class="number">5</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_yticks(y_ticks[::<span class="number">5</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_xticklabels(x_ticks_labels[::<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.2. 添加网络信息</span></span><br><span class="line"><span class="comment"># 参数：linestyle: 绘制网格的方式，alpha:透明度</span></span><br><span class="line"><span class="comment"># plt.grid(True, linestyle=&quot;-&quot;, alpha=1)</span></span><br><span class="line">axes[<span class="number">0</span>].grid(<span class="literal">True</span>, linestyle=<span class="string">&quot;-&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">axes[<span class="number">1</span>].grid(<span class="literal">True</span>, linestyle=<span class="string">&quot;-&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.3. 添加描述</span></span><br><span class="line"><span class="comment"># plt.xlabel(&quot;时间&quot;)</span></span><br><span class="line"><span class="comment"># plt.ylabel(&quot;温度&quot;)</span></span><br><span class="line"><span class="comment"># plt.title(&quot;中午11：00到12：00温度变化&quot;)</span></span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_xlabel(<span class="string">&quot;时间&quot;</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_ylabel(<span class="string">&quot;温度&quot;</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">&quot;中午11：00到12：00温度变化&quot;</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">1</span>].set_xlabel(<span class="string">&quot;时间&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_ylabel(<span class="string">&quot;温度&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">&quot;中午11：00到12：00温度变化&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.4. 显示图例, 需要在显示前声明plot里面的值</span></span><br><span class="line"><span class="comment"># plt.legend(loc=0)</span></span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].legend(loc=<span class="number">0</span>)</span><br><span class="line">axes[<span class="number">1</span>].legend(loc=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 图像显示</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Numpy"><a href="#5-Numpy" class="headerlink" title="5. Numpy"></a>5. Numpy</h2><h3 id="5-1-基操"><a href="#5-1-基操" class="headerlink" title="5.1. 基操"></a>5.1. 基操</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/26/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83conda/" rel="prev" title="python虚拟环境conda">
+      <i class="fa fa-chevron-left"></i> python虚拟环境conda
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/29/%E7%8C%AB%E6%97%A5%E8%AE%B0/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">人工智能基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1. 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%B5%B7%E6%BA%90"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. 人工智能起源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2. 人工智能三个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3. 人工智能、机器学习和深度学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E4%B8%BB%E8%A6%81%E5%88%86%E6%94%AF"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4. 主要分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%BF%85%E5%A4%87%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5. 人工智能必备三要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-GPU%E3%80%81CPU"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.6. GPU、CPU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.</span> <span class="nav-text">2. 机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 机器学习算法分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 模型评估</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">3. 机器学习环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1. 环境安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-jupyter%E5%9F%BA%E6%93%8D"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2. jupyter基操</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Matplotlib"><span class="nav-number">1.4.</span> <span class="nav-text">4. Matplotlib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%B8%89%E5%B1%82%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1. 三层结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%8A%98%E7%BA%BF%E5%9B%BE%E4%B8%8E%E5%9F%BA%E6%93%8D"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2. 折线图与基操</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Numpy"><span class="nav-number">1.5.</span> <span class="nav-text">5. Numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%9F%BA%E6%93%8D"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1. 基操</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">WHASO</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WHASO</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

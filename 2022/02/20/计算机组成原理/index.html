@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="计算机组成原理1. Basic1.1. 基本组成五大部分  运算器  (CPU) (主机): 算术运算、逻辑运算 控制器  (CPU) (主机): 指挥各部件, 使程序运行 存储器 : 存放数据和程序 主存  (主机) 辅存  (I&#x2F;O设备)   输入设备  (I&#x2F;O设备) 输出设备  (I&#x2F;O设备)  1.2. 各硬件部分 寄存, 就是暂存数据的意思, 类似快递点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理">
+<meta property="og:url" content="http://example.com/2022/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="whaso&#39;s Blog">
+<meta property="og:description" content="计算机组成原理1. Basic1.1. 基本组成五大部分  运算器  (CPU) (主机): 算术运算、逻辑运算 控制器  (CPU) (主机): 指挥各部件, 使程序运行 存储器 : 存放数据和程序 主存  (主机) 辅存  (I&#x2F;O设备)   输入设备  (I&#x2F;O设备) 输出设备  (I&#x2F;O设备)  1.2. 各硬件部分 寄存, 就是暂存数据的意思, 类似快递点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/..%5Cimages%5Cimage-20220724170433901.png">
+<meta property="article:published_time" content="2022-02-20T06:59:37.000Z">
+<meta property="article:modified_time" content="2023-07-01T01:58:15.653Z">
+<meta property="article:author" content="WHASO">
+<meta property="article:tag" content="计组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/..%5Cimages%5Cimage-20220724170433901.png">
+
+<link rel="canonical" href="http://example.com/2022/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机组成原理 | whaso's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="whaso's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">whaso's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WHASO">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whaso's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机组成原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 14:59:37" itemprop="dateCreated datePublished" datetime="2022-02-20T14:59:37+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-01 09:58:15" itemprop="dateModified" datetime="2023-07-01T09:58:15+08:00">2023-07-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">计组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h1><h2 id="1-Basic"><a href="#1-Basic" class="headerlink" title="1. Basic"></a>1. Basic</h2><h3 id="1-1-基本组成"><a href="#1-1-基本组成" class="headerlink" title="1.1. 基本组成"></a>1.1. 基本组成</h3><p><strong>五大部分</strong></p>
+<ul>
+<li><strong>运算器</strong>  (CPU) (主机): 算术运算、逻辑运算</li>
+<li><strong>控制器</strong>  (CPU) (主机): 指挥各部件, 使程序运行</li>
+<li>存储器 : 存放数据和程序<ul>
+<li><strong>主存</strong>  (主机)</li>
+<li>辅存  (I&#x2F;O设备)</li>
+</ul>
+</li>
+<li><strong>输入设备</strong>  (I&#x2F;O设备)</li>
+<li><strong>输出设备</strong>  (I&#x2F;O设备)</li>
+</ul>
+<h3 id="1-2-各硬件部分"><a href="#1-2-各硬件部分" class="headerlink" title="1.2. 各硬件部分"></a>1.2. 各硬件部分</h3><blockquote>
+<p>寄存, 就是暂存数据的意思, 类似快递点</p>
+</blockquote>
+<p><strong>主存储器</strong></p>
+<blockquote>
+<p>存储体存数据, MAR对应数据位置(主存地址), MDR暂存对应的实际数据</p>
+<p>类似快递点: 存储体&#x3D;&gt; 货架,  MAR &#x3D;&gt; 店员,  MDR &#x3D;&gt; 取货&#x2F;放货 的柜台</p>
+<p>取数据过程: CPU把地址给到MAR, 把读指令给到主存储器, 主存储器把存储体MAR地址的数据放到MDR等待使用</p>
+<p>存数据过程: CPU把地址给到MAR, 把数据放到MDR, 把写指令给到主存储器, 主存储器根据指令把MDR中数据存储到存储体的MAR地址</p>
+</blockquote>
+<ul>
+<li>存储体: 数据在存储体中按地址存储, 每个地址对应一个存储单元<ul>
+<li>存储单元: 每个存储单元存放一串二进制代码<ul>
+<li>存储元: 即存储二进制的电子元件, 每个存储元可存1bit</li>
+</ul>
+</li>
+<li>存储字: 存储单元中二进制的组合</li>
+<li>存储字长: 存储单元中二进制代码的位数</li>
+</ul>
+</li>
+<li>MAR: 存储地址寄存器, 用于指明要读&#x2F;写哪个存储单元, 其位数反映存储单元数量 Memory Address Register </li>
+<li>MDR: 存储数据寄存器, 用于暂存要读&#x2F;写的数据, 其位数&#x3D;存储字长 Memory Data Register</li>
+</ul>
+<p><strong>运算器</strong>: 用于实现算术运算(+ - * &#x2F;)、逻辑运算(与&#x2F;非)</p>
+<blockquote>
+<p>前三个存数据, ALU执行(运算)</p>
+</blockquote>
+<ul>
+<li>ACC: 累加计数器, 存放操作数、运算的结果 Accumulator</li>
+<li>MQ: 乘商寄存器, 进行乘、除法时用  Multiple-Quotient Register</li>
+<li>X: 通用寄存器, 存放操作数</li>
+<li>ALU: 算数逻辑单元, 用电路实现各种算数运算、逻辑运算  Arthmetic and Logic Unit</li>
+</ul>
+<p><strong>控制器</strong></p>
+<blockquote>
+<p>PC + IR 取指令, CU执行</p>
+</blockquote>
+<ul>
+<li>PC: 程序计数器, 存放下一条指令的地址  Program Counter</li>
+<li>IR: 指令寄存器, 存放当前执行的指令    Instruction Register</li>
+<li>CU: 控制单元, 分析指令, 给出控制信息 Control Unit</li>
+</ul>
+<p><strong>工作过程</strong></p>
+<ul>
+<li>初始: 指令、数据存入主存, PC指向第一条指令</li>
+<li>从主存中取指令放入IR、PC自动加1, CU分析指令, CU指挥其他部件执行指令</li>
+</ul>
+<h3 id="1-3-计算机系统层次结构"><a href="#1-3-计算机系统层次结构" class="headerlink" title="1.3. 计算机系统层次结构"></a>1.3. 计算机系统层次结构</h3><table>
+<thead>
+<tr>
+<th>微程序机器M0</th>
+<th>传统机器M1</th>
+<th>虚拟机器M2</th>
+<th>虚拟机器M3</th>
+<th>虚拟机器M4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>微指令系统</td>
+<td>用机器语言的机器</td>
+<td>操作系统机器</td>
+<td>汇编语言机器</td>
+<td>高级语言机器</td>
+</tr>
+<tr>
+<td>硬件</td>
+<td>硬件</td>
+<td>软件</td>
+<td>软件</td>
+<td>软件</td>
+</tr>
+<tr>
+<td>由硬件直接执行微指令</td>
+<td>执行二进制机器指令</td>
+<td>向上提供”广义指令”(系统调用)</td>
+<td>用汇编程序翻译成机器语言程序</td>
+<td>用编译程序翻译成汇编语言程序</td>
+</tr>
+<tr>
+<td>微指令1 &#x2F; 2 &#x2F; 3</td>
+<td>000010000000101</td>
+<td></td>
+<td>LOAD 5</td>
+<td>y&#x3D;a*b + c</td>
+</tr>
+</tbody></table>
+<p><strong>三种级别的语言</strong></p>
+<ul>
+<li>机器语言: 二进制代码</li>
+<li>汇编语言: 助记符<ul>
+<li>将汇编语言翻译成机器语言</li>
+</ul>
+</li>
+<li>高级语言: C, Python<ul>
+<li>编译程序(编译器): 将高级语言一次全部翻译为汇编语言, 或直接翻译为机器语言</li>
+<li>解释程序(解释器): 将高级语言翻译为机器语言, 翻译一句执行一句</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-存储器的性能指标"><a href="#1-4-存储器的性能指标" class="headerlink" title="1.4. 存储器的性能指标"></a>1.4. 存储器的性能指标</h3><ul>
+<li>CPU主频: CPU内数字脉冲信号振荡的频率 (Hz)</li>
+<li>CPU时钟周期 &#x3D; 1 &#x2F; CPU主频  (秒)</li>
+<li>CPI(Clock cycle Per Instruction): 执行一条指令所需的时钟周期数</li>
+</ul>
+<blockquote>
+<p>不同的指令, CPI不同, 甚至相同的指令, CPI也可能变化</p>
+</blockquote>
+<ul>
+<li>执行一条指令的耗时 &#x3D; CPI * CPU时钟周期</li>
+<li>IPS(Instructions Per Second): 每秒执行多少条指令  &#x3D; 主频 &#x2F; 平均CPI   (KMGT  Kilo&#x3D;10 ** 3  Million&#x3D;10 ** 6)</li>
+<li>FLOPS(Floating-point Operations Per Second): 每秒执行多少次浮点运算  (KMGT  Giga&#x3D;10 ** 9  Tera&#x3D;10 ** 12)</li>
+</ul>
+<h3 id="1-5-系统整体的性能指标"><a href="#1-5-系统整体的性能指标" class="headerlink" title="1.5. 系统整体的性能指标"></a>1.5. 系统整体的性能指标</h3><blockquote>
+<p>描述存储容量, 文件大小时: K &#x3D; 2^10, M&#x3D;2^20, G&#x3D;2^30, T&#x3D;2^40</p>
+<p>描述频率, 速率时: K&#x3D;10^3, M&#x3D;10^6, G&#x3D;10^9, T&#x3D;10^12</p>
+</blockquote>
+<ul>
+<li>数据通路带宽: 数据总线一次所能并行传送信息的位数(各硬件部件通过数据总线传输数据)</li>
+<li>吞吐量: 指系统在单位时间内处理请求的数量</li>
+<li>响应时间: 指从用户向计算机发送一个请求, 到系统对该请求做出响应并获得它所需要的结果的时间</li>
+<li>基准程序: 用来测量计算机的一种实用程序(跑分软件)</li>
+</ul>
+<h2 id="2-数据的表示和运算"><a href="#2-数据的表示和运算" class="headerlink" title="2. 数据的表示和运算"></a>2. 数据的表示和运算</h2><h3 id="2-1-进位计数制"><a href="#2-1-进位计数制" class="headerlink" title="2.1. 进位计数制"></a>2.1. 进位计数制</h3><ul>
+<li><p>位权: 由符号的位置反映权重</p>
+</li>
+<li><p>基数: 每个数码位所用到的不同符号的个数, r进制的基数为r</p>
+</li>
+<li><p>计算机使用二进制</p>
+<ul>
+<li>可使用两个稳定状态的物理器件表示</li>
+<li>0，1正好对应逻辑值 真、假。方便实现逻辑运算</li>
+<li>可很方便地使用逻辑门电路实现算术运算</li>
+</ul>
+</li>
+<li><p>二进制 &gt;&gt; 八进制： 3位一组，每组转换成对应的八进制符号</p>
+</li>
+<li><p>二进制 &gt;&gt; 十六进制： 3位一组</p>
+</li>
+<li><p>十进制 &gt;&gt; r进制</p>
+<ul>
+<li>整数部分：除基取余法，先取得的“余”是整数的低位</li>
+<li>小数部分：乘基取整法，先取得的“整”是小数的高位</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>2^12^</th>
+<th>2^11^</th>
+<th>2^10^</th>
+<th>2^9^</th>
+<th>2^8^</th>
+<th>2^7^</th>
+<th>2^6^</th>
+<th>2^5^</th>
+<th>2^4^</th>
+<th>2^3^</th>
+<th>2^2^</th>
+<th>2^1^</th>
+<th>2^0^</th>
+<th>2^-1^</th>
+<th>2^-2^</th>
+<th>2^-3^</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4096</td>
+<td>2048</td>
+<td>1024</td>
+<td>512</td>
+<td>256</td>
+<td>128</td>
+<td>64</td>
+<td>32</td>
+<td>16</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>0.5</td>
+<td>0.25</td>
+<td>0.125</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>参考上图可知有部分小数是无法用二进制精确表示的</p>
+</blockquote>
+<ul>
+<li>真值： 实际的带正负号的数值（人类习惯的样子）</li>
+<li>机器数：把正负号数字化的数（存到机器里的样子）</li>
+</ul>
+<h3 id="2-2-BCD码"><a href="#2-2-BCD码" class="headerlink" title="2.2. BCD码"></a>2.2. BCD码</h3><blockquote>
+<p>二进制转十进制时按乘转换麻烦, 所以用BCD转换</p>
+<p>BCD: Binary-Coded Decimal, 用二进制编码的十进制</p>
+</blockquote>
+<ul>
+<li><strong>8421码</strong></li>
+</ul>
+<p>映射关系:</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0000</td>
+<td>0001</td>
+<td>0010</td>
+<td>0011</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+<td>0111</td>
+<td>1000</td>
+<td>1001</td>
+</tr>
+</tbody></table>
+<p>例:</p>
+<p>十进制:   5  +  8                     13</p>
+<p>十进制: 0101  +  1000         1101 </p>
+<p> 8421码中 1010 ~ 1111 没有定义 需要 + 0110 做数据修正(强制向高位进1) 上例得  0001 0011 即 13</p>
+<p>4个十进制位 –&gt;&gt; 16种不同的状态</p>
+<p>BCD码只使用其中的10种  –&gt;&gt; 不同的映射方案</p>
+<ul>
+<li><strong>余3码:</strong>  8421码  +  (0011)<del>2</del></li>
+</ul>
+<p>映射关系:</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0011</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+<td>0111</td>
+<td>1000</td>
+<td>1001</td>
+<td>1010</td>
+<td>1011</td>
+<td>1100</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>2421码:</strong>  改变权值的定义</li>
+</ul>
+<p>XXXX -&gt; 2421  并规定 0<del>4 开头是0  5</del>? 开头是1</p>
+<p>映射关系:</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0000</td>
+<td>0001</td>
+<td>0010</td>
+<td>0011</td>
+<td>0100</td>
+<td>1011</td>
+<td>1100</td>
+<td>1101</td>
+<td>1110</td>
+<td>1111</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-字符与字符串"><a href="#2-3-字符与字符串" class="headerlink" title="2.3. 字符与字符串"></a>2.3. 字符与字符串</h3><h4 id="2-3-1-ASCII码"><a href="#2-3-1-ASCII码" class="headerlink" title="2.3.1. ASCII码"></a>2.3.1. ASCII码</h4><blockquote>
+<p>常用的数字、字母、符号(英文)共128个字符 –&gt; 7个二进制编码  –&gt; ASCII码 </p>
+<p>存入计算机通常在高位补个0, 凑足1B(字节)  即 8bit</p>
+<p>可印刷字符: 32~126, 其余为控制、通信字符</p>
+<p>规律:</p>
+<p>​	数字: 48(0011 0000) ~ 57(0011 1001) 后面一个比特位刚好是数字对应的8421码</p>
+<p>​	大写字母: 65(0100 0001) ~ 90(0101 1010) 前三个010 后面为1~26</p>
+<p>​	小写字母: 97(0110 0001) ~ 122(0111 1010) 前三个011 后面为1~26</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) == <span class="number">32</span></span><br><span class="line">&gt;&gt; <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/..%5Cimages%5Cimage-20220724170433901.png" alt="image-20220724170433901"></p>
+<h4 id="2-3-2-汉字的表示和编码"><a href="#2-3-2-汉字的表示和编码" class="headerlink" title="2.3.2. 汉字的表示和编码"></a>2.3.2. 汉字的表示和编码</h4><p>1980年 GB 2312-80: 汉字+各种符号共7445个</p>
+<p>区位码: 94个区,  每区94个位置(即94行, 94列)</p>
+<p>国标码: 为防止信息交换时与”控制&#x2F;通信字符”冲突,  在区位码基础上加32(16进制: 20H)</p>
+<blockquote>
+<p>国标码已可保证数据传输, 但无法和ASCII做区分</p>
+</blockquote>
+<p>汉字内码: 保证高位为1, 与ASCII码做区分, 在国标码基础上加128 (1000, 0000) (16进制: 80H)</p>
+<blockquote>
+<p>汉字内码可以保证数据在计算机内部的处理, 计算机发现高位为1时可判断出是汉字</p>
+</blockquote>
+<p>例: </p>
+<table>
+<thead>
+<tr>
+<th>汉字(十进制)</th>
+<th>区位码(十六进制)</th>
+<th>国标码(十六进制)</th>
+<th>汉字内码(十六进制)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>啊(16 01)</td>
+<td>10H 01H</td>
+<td>30H 21H</td>
+<td>B0H A1H</td>
+</tr>
+</tbody></table>
+<p>输入：输入编码</p>
+<blockquote>
+<p>拼音  a1 &#x3D;&gt; 国标码 &#x3D;&gt; 汉字内码</p>
+</blockquote>
+<p>输出：汉字字形码</p>
+<blockquote>
+<p>就是对应到一个字块的像素</p>
+</blockquote>
+<h4 id="2-3-3-字符串"><a href="#2-3-3-字符串" class="headerlink" title="2.3.3. 字符串"></a>2.3.3. 字符串</h4><ul>
+<li>从低地址到高地址逐个字符存储, 很多语言中,  ‘\0’作为字符串结尾标识</li>
+<li>对于多字节的数据(如汉字),  可采取大&#x2F;小端存储模式</li>
+<li>大&#x2F;小端模式: 将数据的最高有效字节存放在低&#x2F;高地址单元中</li>
+</ul>
+<h3 id="2-4-奇偶校验"><a href="#2-4-奇偶校验" class="headerlink" title="2.4. 奇偶校验"></a>2.4. 奇偶校验</h3><h4 id="2-4-1-原理"><a href="#2-4-1-原理" class="headerlink" title="2.4.1. 原理"></a>2.4.1. 原理</h4><ul>
+<li><p>码字: 由若干位代码组成的一个字</p>
+</li>
+<li><p>将两个码字逐位进行对比,  具有不同的位的个数称为两个码字间的距离</p>
+</li>
+<li><p>码距(d): 一种编码方案可能有若干个合法码字,  各合法码字间的最小距离我称为码距</p>
+</li>
+<li><p>当d &#x3D; 1时, 无检错能力</p>
+</li>
+<li><p>当d &#x3D; 2时, 有检错能力</p>
+</li>
+<li><p>当d &#x3D; 3 时, 可能有检错、纠错能力</p>
+</li>
+</ul>
+<p>奇校验码: 整个校验码(有效信息位和校验位) 中的 1 个个数为奇数</p>
+<table>
+<thead>
+<tr>
+<th>奇&#x2F;偶 校验位</th>
+<th>信息位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1&#x2F;0</td>
+<td>n</td>
+</tr>
+</tbody></table>
+<p>偶校验硬件实现: </p>
+<ul>
+<li><p>计算校验位的值:  各信息进行异或运算, 得到的结果即为偶校验位</p>
+</li>
+<li><p>校验:  对所有位进行异或, 结果为1说明出错</p>
+</li>
+</ul>
+<h4 id="2-4-2-海明码"><a href="#2-4-2-海明码" class="headerlink" title="2.4.2. 海明码"></a>2.4.2. 海明码</h4><blockquote>
+<p>由于奇偶校验的策略仅加了一个比特位,  只能携带2种状态, 能发现数位错误,  但无法确定是哪一位出错</p>
+<p>海明码是在原数据中的一些固定位置，插入一个0（或1），以进行奇（或偶）校验位，虽然使原数据变长，但可使其拥有纠错能力。<br>能侦测并更正一个比特的错误；若有两个比特出错，则只能侦测，不能更正；若有三个或更多的比特出错，则不能侦测，更不能更正。</p>
+</blockquote>
+<p>海明码设计思路:  将信息位分组进行偶校验 &#x3D;&gt; 多个校验位 &#x3D;&gt; 多个校验位标注出错位置</p>
+<p>n个信息位  k个校验位  共 n+k 位  2^k种状态</p>
+<p>公式:  2^k^  &gt;&#x3D; n + k + 1</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>1</th>
+<th>2-4</th>
+<th>5-11</th>
+<th>12-26</th>
+<th>27-57</th>
+<th>58-120</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>k</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p><strong>求解步骤</strong></p>
+<p>信息位： 1010</p>
+<ol>
+<li>确定海明码的位数：2^k^ &gt;&#x3D; n + k + 1</li>
+</ol>
+<p>n &#x3D; 4  一&gt; k &#x3D; 3</p>
+<p>设信息位D<del>4</del>D<del>3</del>D<del>2</del>D<del>1</del>(1010)，共4位，校验位P<del>1</del>P<del>2</del>P<del>3</del>,  共3位， 对应海明码为H<del>7</del>H<del>6</del>H<del>5</del>H<del>4</del>H<del>3</del>H<del>2</del>H<del>1</del>.</p>
+<ol start="2">
+<li>确定校验位的分布</li>
+</ol>
+<blockquote>
+<p>校验位P<del>i</del> 放在海明码位号为2^i-1^的位置上，其余信息位顺序放</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>H<del>7</del></th>
+<th>H<del>6</del></th>
+<th>H<del>5</del></th>
+<th>H<del>4</del></th>
+<th>H<del>3</del></th>
+<th>H<del>2</del></th>
+<th>H<del>1</del></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D<del>4</del></td>
+<td>D<del>3</del></td>
+<td>D<del>2</del></td>
+<td>P<del>3</del></td>
+<td>D<del>1</del></td>
+<td>P<del>2</del></td>
+<td>P<del>1</del></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>求校验位的值</li>
+</ol>
+<p>H<del>3</del>  :  3  转二进制  0   1   1</p>
+<p>H<del>5</del>  :  5     —&gt;&gt;&gt;    1   0   1</p>
+<p>H<del>6</del>  :  6     —&gt;&gt;&gt;    1   1   0</p>
+<p>H<del>7</del>   : 7      —&gt;&gt;&gt;   1   1   1</p>
+<blockquote>
+<p>根据P下标对应二进制位的权重进行分组</p>
+</blockquote>
+<p>​		P1 对应二进制权重1的位置为1的信息位 H3 H5 H7 再根据对应信息位的值求异或得 0</p>
+<p>​		P2 对应二进制权重2的位置为1的信息位 H3 H6 H7 再根据对应信息位的值求异或得 1</p>
+<p>​		P3 对应二进制权重4的位置为1的信息位 H5 H6 H7  再根据对应信息位的值求异或得 0</p>
+<ol start="4">
+<li>纠错</li>
+</ol>
+<blockquote>
+<p>校验方程：校验位及其对应分组值求异或  为0即无错误</p>
+</blockquote>
+<p>接收到：1010010 无错误</p>
+<p>接收到：1010000  H2位错误</p>
+<p>​		S1 &#x3D;&gt; P1 H3 H5 H7  &#x3D;&gt; H1 H3 H5 H7  &#x3D;&gt; 0011 &#x3D;&gt; 0</p>
+<p>​		S2 &#x3D;&gt; P2 H3 H6 H7  &#x3D;&gt; H2 H3 H6 H7  &#x3D;&gt; 0001 &#x3D;&gt; 1</p>
+<p>​		S3 &#x3D;&gt; P3 H3 H5 H7  &#x3D;&gt; H4 H3 H5 H7  &#x3D;&gt; 0011 &#x3D;&gt; 0</p>
+<p>错误位即： 010 &#x3D;&gt; H2</p>
+<ol start="5">
+<li>补充</li>
+</ol>
+<p>海明码的检错、纠错能力：1位可纠错， 2位可检错</p>
+<p>实际使用中会在头部再加一个全校验位H<del>8</del>（P<del>全</del>），对整体进行偶校验</p>
+<p>S<del>3</del>S<del>2</del>S<del>1</del>  &#x3D; 000 且全体偶校验成功  -&gt; 无错误</p>
+<p>S<del>3</del>S<del>2</del>S<del>1</del>  !&#x3D; 000 且全体偶校验失败  -&gt; 1位错误，纠正即可</p>
+<p>S<del>3</del>S<del>2</del>S<del>1</del>  !&#x3D; 000 且全体偶校验成功  -&gt; 2位错误，不可纠正，需重传</p>
+<h3 id="2-5-循环冗余校验"><a href="#2-5-循环冗余校验" class="headerlink" title="2.5. 循环冗余校验"></a>2.5. 循环冗余校验</h3><blockquote>
+<p>Cyclic Redundancy Check,  CRC</p>
+</blockquote>
+<h4 id="2-5-1-原理"><a href="#2-5-1-原理" class="headerlink" title="2.5.1. 原理"></a>2.5.1. 原理</h4><ol>
+<li><p>数据发送、接受方约定一个”除数“</p>
+</li>
+<li><p>K个信息位 + R个校验位 作为”被除数“， 添加校验位后需要保证除法的余数为0</p>
+</li>
+<li><p>收到数据后，进行除法检查余数是否为0</p>
+</li>
+<li><p>若余数为非0说明出错，则进行纠错或重传</p>
+</li>
+</ol>
+<h4 id="2-5-2-构造方法"><a href="#2-5-2-构造方法" class="headerlink" title="2.5.2. 构造方法"></a>2.5.2. 构造方法</h4><blockquote>
+<p>模二除：十进制除法基础上，每次上的值由被除数高为是否为1决定，1就上1，0就上0再加一位（模二除后余数位数应该正好比除数少1位）</p>
+<p>模二减：对应位取异或</p>
+</blockquote>
+<ol>
+<li>由生成多项式确定”除数”。若生成多项式中x的最高次为R，则”除数“有R+1位</li>
+<li>K个信息位 + R个0，作为”被除数“</li>
+<li>被除数、除数 进行”模二除“，得R位余数</li>
+<li>K个信息位 + R位余数 &#x3D; CRC码</li>
+</ol>
+<h4 id="2-5-3-检错纠错"><a href="#2-5-3-检错纠错" class="headerlink" title="2.5.3. 检错纠错"></a>2.5.3. 检错纠错</h4><ol>
+<li>可检测出所有奇数个错误</li>
+<li>可检测出所有双比特的错误</li>
+<li>可检测出所有小于等于校验位长度的连续错误</li>
+<li>若选择合适的生成多项式，且2^R^ &gt;&#x3D; K + R + 1，则可纠正单比特位错误</li>
+</ol>
+<h4 id="2-5-4-例"><a href="#2-5-4-例" class="headerlink" title="2.5.4. 例"></a>2.5.4. 例</h4><p>设生成多项式为G(x) &#x3D; x^3^ + x^2^ + 1, 信息码为101001，求对应的CRC码。</p>
+<ol>
+<li>确定K、R以及生成多项式对应的二进制码</li>
+</ol>
+<p>K&#x3D;信息码的长度：6</p>
+<p>R&#x3D;生成多项式最高次幂：3</p>
+<p>N(校验码位数) &#x3D; K + R &#x3D; 9</p>
+<p>生成多项式G(x) &#x3D; 1 * x^3^ + 1 * x^2^ + 0 * x^1^ + 1 * x^0^, 对应二进制码1101</p>
+<ol start="2">
+<li>移位</li>
+</ol>
+<p>信息码左移R位，低位补0，对应二进制码 1101000</p>
+<ol start="3">
+<li>相除（模二除）</li>
+</ol>
+<p>101001 000 模二除 1101 余数001，</p>
+<p>得CRC码 101001 001</p>
+<ol start="4">
+<li>检错和纠错</li>
+</ol>
+<p>发送： 101001001</p>
+<p>接收： 101001001 用1101进行模二除 余数为000，代表没出错</p>
+<p>接收： 101001011 用1101进行模二除 余数为010，代表出错</p>
+<blockquote>
+<p>信息位+校验位 共9位，但校验位3位8保状态，无法表示全部所以才没纠错能力</p>
+</blockquote>
+<p>K个信息位，R个校验位，若生成多项式选择得当，且2^R^ &gt;&#x3D; K + R _+ 1, 则CRC码可纠正1位错</p>
+<blockquote>
+<p>CRC码实际常应用在计算机网络中，几千个bit的信息位 + 几个校验位， 仅用来检错，不用来纠错</p>
+</blockquote>
+<h3 id="2-6-定点数"><a href="#2-6-定点数" class="headerlink" title="2.6. 定点数"></a>2.6. 定点数</h3><blockquote>
+<p>定点数： 小数点的位置固定  995.222               –常规计数</p>
+<p>浮点数：小数点的位置不固定  9.95222 * 10^2^  –科学计数</p>
+<p>二进制和十进制的一样也是分为定点和浮点</p>
+</blockquote>
+<h4 id="2-6-1-无符号数"><a href="#2-6-1-无符号数" class="headerlink" title="2.6.1. 无符号数"></a>2.6.1. 无符号数</h4><ul>
+<li><p>概念：整个机器字长的全部二进制位均为数值位，没有符号位，相当于数的绝对值。</p>
+</li>
+<li><p>表示范围：n位二进制数：0 ~ 2^n^ - 1 </p>
+</li>
+<li><p>通常只有无符号的整数，而没有无符号小数</p>
+</li>
+</ul>
+<h4 id="2-6-2-有符号数定点表示"><a href="#2-6-2-有符号数定点表示" class="headerlink" title="2.6.2. 有符号数定点表示"></a>2.6.2. 有符号数定点表示</h4><blockquote>
+<p>数值部分也称尾数</p>
+<p>用定点方式表示19.75时，需要把整数和小数部分分别单独保存</p>
+<p>可用原码、反码、补码三种方式来表示定点整数和定点小数。还可以用移码表示定点整数</p>
+<p>若真值为x，则用 [x]<del>原</del>、 [x]<del>反</del>、 [x]<del>补</del>、 [x]<del>移</del>、分别表示真值所对应的原码、反码、补码、移码</p>
+</blockquote>
+<ul>
+<li>定点整数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>x0</th>
+<th>x1</th>
+<th>x2</th>
+<th>…</th>
+<th>xn</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>符号位</td>
+<td>数</td>
+<td>值</td>
+<td>部</td>
+<td>分</td>
+<td>小数点位置（隐含）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>定点小数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>x0</th>
+<th></th>
+<th>x1</th>
+<th>x2</th>
+<th>…</th>
+<th>xn</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>符号位</td>
+<td>小数点位置（隐含）</td>
+<td>数</td>
+<td>值</td>
+<td>部</td>
+<td>分</td>
+</tr>
+</tbody></table>
+<p><strong>原码：用尾数表示真值的绝对值，符号位 0&#x2F;1 对应 正&#x2F;负</strong></p>
+<ul>
+<li>整数表示范围（机器字长n+1）：-(2^n^-1) &lt;&#x3D; x &lt;&#x3D; 2^n^-1<ul>
+<li>真值0有+0和-0两种形式</li>
+<li>8位表示整数+19：0 0010011</li>
+</ul>
+</li>
+<li>小数表示范围（机器字长n+1）： -(1-2^-n^) &lt;&#x3D; x &lt;&#x3D; 1-2^-n^<ul>
+<li>真值0有+0和-0两种形式</li>
+<li>8位表示小数-0.75： 1 110000</li>
+</ul>
+</li>
+</ul>
+<p><strong>反码：若符号位为0，则反码与原码相同；若符号位为1，则数值位全部取反</strong></p>
+<ul>
+<li>整数&#x2F;小数 表示范围和原码相同</li>
+</ul>
+<p><strong>补码：正数的补码与原码相同；负数的补码&#x3D;反码末位+1（要考虑进位）</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%BB%84/" rel="tag"># 计组</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/09/python+flask+oracle+docker+alpine/" rel="prev" title="oracle常用命令">
+      <i class="fa fa-chevron-left"></i> oracle常用命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/26/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83conda/" rel="next" title="python虚拟环境conda">
+      python虚拟环境conda <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">计算机组成原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Basic"><span class="nav-number">1.1.</span> <span class="nav-text">1. Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. 基本组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%90%84%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2. 各硬件部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3. 计算机系统层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4. 存储器的性能指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5. 系统整体的性能指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">2. 数据的表示和运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E5%88%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 进位计数制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-BCD%E7%A0%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. BCD码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%AD%97%E7%AC%A6%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 字符与字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-ASCII%E7%A0%81"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1. ASCII码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-%E6%B1%89%E5%AD%97%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E7%BC%96%E7%A0%81"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2.3.2. 汉字的表示和编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">2.3.3. 字符串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 奇偶校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1. 原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-%E6%B5%B7%E6%98%8E%E7%A0%81"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2. 海明码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. 循环冗余校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">2.5.1. 原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2.5.2. 构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-3-%E6%A3%80%E9%94%99%E7%BA%A0%E9%94%99"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">2.5.3. 检错纠错</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-4-%E4%BE%8B"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">2.5.4. 例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%AE%9A%E7%82%B9%E6%95%B0"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. 定点数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">2.6.1. 无符号数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%AE%9A%E7%82%B9%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.6.2.</span> <span class="nav-text">2.6.2. 有符号数定点表示</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">WHASO</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WHASO</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

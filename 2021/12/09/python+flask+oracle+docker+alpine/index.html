@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="和MySQL对比 大小写: oracle 本身不区分大小写 (会把关键字全部转为大写再执行),但是对引号里的字符区分大小写。  主键自增: oracle 没有自带的主键自增, 需要先创建一个序列, 再创建一个触发器, 来实现主键自增   相关命令123456789101112131415161718192021222324252627282930313233# 查看当前用户所有序列select *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle常用命令">
+<meta property="og:url" content="http://example.com/2021/12/09/python+flask+oracle+docker+alpine/index.html">
+<meta property="og:site_name" content="whaso&#39;s Blog">
+<meta property="og:description" content="和MySQL对比 大小写: oracle 本身不区分大小写 (会把关键字全部转为大写再执行),但是对引号里的字符区分大小写。  主键自增: oracle 没有自带的主键自增, 需要先创建一个序列, 再创建一个触发器, 来实现主键自增   相关命令123456789101112131415161718192021222324252627282930313233# 查看当前用户所有序列select *">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-09T08:05:29.000Z">
+<meta property="article:modified_time" content="2022-07-24T08:18:32.462Z">
+<meta property="article:author" content="WHASO">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/12/09/python+flask+oracle+docker+alpine/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>oracle常用命令 | whaso's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="whaso's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">whaso's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/09/python+flask+oracle+docker+alpine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WHASO">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="whaso's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          oracle常用命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-09 16:05:29" itemprop="dateCreated datePublished" datetime="2021-12-09T16:05:29+08:00">2021-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-24 16:18:32" itemprop="dateModified" datetime="2022-07-24T16:18:32+08:00">2022-07-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="和MySQL对比"><a href="#和MySQL对比" class="headerlink" title="和MySQL对比"></a>和MySQL对比</h3><ul>
+<li><p>大小写: <strong>oracle</strong> 本身不区分大小写 (会把关键字全部转为大写再执行),但是对引号里的字符区分大小写。</p>
+</li>
+<li><p>主键自增: <strong>oracle</strong> 没有自带的主键自增, 需要先创建一个序列, 再创建一个触发器, 来实现主键自增</p>
+</li>
+</ul>
+<h4 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前用户所有序列</span></span><br><span class="line">select * from user_objects where object_type=&#x27;SEQUENCE&#x27;;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看表的所有触发器</span></span><br><span class="line">select * from all_triggers where table_name=&#x27;表名&#x27;; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建序列</span></span><br><span class="line">create sequence 序列名称(一般是表名_SEQ)</span><br><span class="line">start with 1  # 开始数字</span><br><span class="line">minvalue 1 # 最小值</span><br><span class="line">maxvalue   # 最大值</span><br><span class="line">cycle    # 是否循环 cycle / nocycle</span><br><span class="line">increment by 1  # 增长数字</span><br><span class="line">nocache # 不使用缓存</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除序列</span></span><br><span class="line">DROP SEQUENCE 序列名;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建触发器</span></span><br><span class="line">create or replace trigger 触发器名</span><br><span class="line">        before insert on 表名</span><br><span class="line">        referencing old as old new as new</span><br><span class="line">        for each row</span><br><span class="line">      begin</span><br><span class="line">        select 序列名.nextval</span><br><span class="line">          into :new.ID</span><br><span class="line">          from dual;</span><br><span class="line">      end 触发器名;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除触发器</span></span><br><span class="line">drop trigger 触发器名;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="基操"><a href="#基操" class="headerlink" title="基操"></a>基操</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查版本</span></span><br><span class="line">select * from v$version;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sqlalchemy_URI  注: 不用指定数据库</span></span><br><span class="line">oracle+cx_oracle://&#123;账号&#125;:&#123;密码&#125;@10.168.199.21:1521/?service_name=&#123;服务名&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Docker-Alpine安装oracle客户端"><a href="#Docker-Alpine安装oracle客户端" class="headerlink" title="Docker Alpine安装oracle客户端"></a><strong>Docker Alpine安装oracle客户端</strong></h3><ol>
+<li><p>进入docker容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name=容器名 镜像名:latest /bin/sh       由镜像创建容器并进入(只有镜像无容器)</span><br><span class="line">或</span><br><span class="line">docker exec -it 容器名 /bin/sh                          直接进入运行中的容器</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装必要包</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add libaio, libnsl, unzip</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>下载解压oracle basic包</li>
+</ol>
+<blockquote>
+<p>需要对应服务器版本, 命令<code>select * from v$version;</code></p>
+<p>各版本下载地址(32位): <a target="_blank" rel="noopener" href="https://www.oracle.com/database/technologies/instant-client/linux-x86-32-downloads.html">https://www.oracle.com/database/technologies/instant-client/linux-x86-32-downloads.html</a></p>
+<p>各版本下载地址(64位): <a target="_blank" rel="noopener" href="https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html">https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载basic免安装zip包, 需要登录验证, 所以下载链接不能复用, 要在上面链接中找对应版本下载</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">弄个单独目录存</span></span><br><span class="line">cd /usr/local</span><br><span class="line">mkdir oracle</span><br><span class="line">cd oracle</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">wget -c 支持断点续传</span></span><br><span class="line">wget -c https://download.oracle.com/otn/linux/instantclient/11204/instantclient-basic-linux.x64-11.2.0.4.0.zip</span><br><span class="line">?AuthParam=1644827926_6725c450378f19288cb3dc5d040b8a18</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">unzip 解压</span></span><br><span class="line">unzip instantclient-basic-linux.x64-11.2.0.4.0.zip?AuthParam\=1644827926_6725c450378f19288cb3dc5d040b8a18</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">整理下文件</span></span><br><span class="line">mv ./instantclient_11_2/* ./</span><br><span class="line">rmdir instantclient_11_2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>unzip End-of-central-directory signature not found: 多半是下载的文件有问题, 重新下载就可以</p>
+</blockquote>
+<ol start="4">
+<li>添加环境变量</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过查看 /etc/profile 可以看到会加载 /etc/profile.d/目录下的 .sh结尾的文件</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">弄个单独的环境变量配置文件</span></span><br><span class="line">vi /etc/profile.d/oracle.sh</span><br><span class="line"> </span><br><span class="line">export ORACLE_HOME=/usr/local/oracle</span><br><span class="line">export NLS_LANG=AMERICAN_AMERICA.AL32UTF8</span><br><span class="line">export LD_LIBRARY_PATH=$ORACLE_HOME</span><br><span class="line">export PATH=$ORACLE_HOME:$PATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试下加上没有</span></span><br><span class="line">source /etc/profile</span><br><span class="line">echo $PATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">退出容器</span></span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注: 这里会有很多奇怪的报错, 以下为作者碰到的</p>
+<p>报错1. Error loading shared library &#x2F;usr&#x2F;local&#x2F;oracle&#x2F;lib&#x2F;libclntsh.so: No such file or directory</p>
+<p>(一开始是打算用软链接的, 但是没用, 直接复制就可以了, 不知道为什么)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/oracle/lib</span><br><span class="line">cp /usr/local/oracle/libclntsh.so.11.1 /usr/local/oracle/lib/libclntsh.so</span><br></pre></td></tr></table></figure>
+<p>如果经过以上操作扔有此报错, 且是用supervisor启动的, 可能是因为supervisor没读到环境变量, 需要在supervisor配置文件中添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">environment=ORACLE_HOME=&quot;/usr/local/oracle&quot;,NLS_LANG=&quot;AMERICAN_AMERICA.AL32UTF8&quot;,LD_LIBRARY_PATH=&quot;/usr/local/oracle&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注: supervisor添加环境变量时, 多个变量以<code>,</code>分隔, 单个变量多个值以<code>:</code>分隔</p>
+<p>报错2.<br>Error loading shared library libnsl.so.1: No such file or directory (needed by &#x2F;usr&#x2F;local&#x2F;oracle&#x2F;lib&#x2F;libclntsh.so<br>(libnsl.so.1  或 libnsl.so) 建对应软链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/lib/libnsl.so.2.0.0 /usr/lib/libnsl.so.1</span><br><span class="line">ln -s /usr/lib/libnsl.so.2.0.0 /usr/lib/libnsl.so</span><br></pre></td></tr></table></figure>
+
+<p>报错3: cx_Oracle.DatabaseError: ORA-21561: OID generation faile</p>
+<p>这是hosts文件有问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hostname  # 查看当前hostname</span><br><span class="line">把当前hostname加入到 /etc/hosts 文件的 127.0.0.1 即可</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<ol start="5">
+<li>提交镜像</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &#x27;laowang&#x27; 容器名 镜像名:1.0.0</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>换docker启动用的镜像版本号</li>
+</ol>
+<blockquote>
+<p>注: 最后会发现环境变量没有加载, 原因未知</p>
+<p>绕路解决方法: </p>
+<ul>
+<li>通过DockerFile直接运行容器的项目: 修改<code>Dockerfile</code>文件,  例: <code>CMD source /etc/profile &amp;&amp; gunicorn ....</code></li>
+<li>通过DockerCompose启动的项目:  修改<code>docker-compose.yml</code>文件 例: <code>command: /bin/sh -c &quot;source /etc/profile &amp;&amp; gunicorn ....&quot;</code></li>
+</ul>
+<p><strong>python 直连测试代码</strong></p>
+<p>import cx_Oracle<br>conn &#x3D; cx_Oracle.connect(“user&#x2F;passwd@host&#x2F;instance”)</p>
+</blockquote>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><ul>
+<li><p>报错ORA-00904: 后查到是数据库字段写错了, 和模型类的不一致</p>
+</li>
+<li><p>索引失效(partition of such index is in unusable state):</p>
+<ul>
+<li><pre><code class="sql">select index_name,status from user_indexes;  # 查失效索引
+
+alter index SYS_C00164313 rebuild;  # 重建索引
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/09/hexo%E9%83%A8%E7%BD%B2%E6%8A%A5%E9%94%99/" rel="prev" title="hexo部署报错">
+      <i class="fa fa-chevron-left"></i> hexo部署报错
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" rel="next" title="计算机组成原理">
+      计算机组成原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8CMySQL%E5%AF%B9%E6%AF%94"><span class="nav-number">1.</span> <span class="nav-text">和MySQL对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">相关命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%93%8D"><span class="nav-number">2.</span> <span class="nav-text">基操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Alpine%E5%AE%89%E8%A3%85oracle%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">Docker Alpine安装oracle客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">4.</span> <span class="nav-text">报错</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">WHASO</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WHASO</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
